@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3f6ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4d6fb8" flood-opacity="0.25"/>
+    </filter>
+    <style>
+      .card-title { font-size: 24px; font-weight: 600; fill: #0d47a1; }
+      .card-icon { font-size: 36px; }
+      .card { fill: #ffffff; stroke: #347fe2; stroke-width: 2; rx: 18; }
+      .card-text { font-size: 20px; fill: #104c9d; font-weight: 600; }
+      .subtitle { font-size: 34px; fill: #0a3c80; font-weight: 600; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1280" height="720" fill="#f4f7fb"/>
+  <rect x="48" y="40" width="1184" height="120" fill="url(#headerGradient)" rx="24" filter="url(#shadow)"/>
+  <text x="96" y="105" font-size="46" font-weight="600" fill="#0a3c80">Gestion de la Base Nautique</text>
+  <text x="96" y="155" class="subtitle">Tableau de bord – Base Nautique</text>
+
+  <g transform="translate(96,220)" font-size="20" fill="#104c9d" font-weight="600">
+    <g transform="translate(0,0)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">🛥️</text>
+      <text class="card-text" x="76" y="67">Gestion des bateaux</text>
+    </g>
+    <g transform="translate(280,0)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">📍</text>
+      <text class="card-text" x="76" y="67">Gestion des emplacements</text>
+    </g>
+    <g transform="translate(560,0)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">💰</text>
+      <text class="card-text" x="76" y="67">Paiements port</text>
+    </g>
+    <g transform="translate(840,0)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">🔧</text>
+      <text class="card-text" x="76" y="67">Maintenance club</text>
+    </g>
+
+    <g transform="translate(0,140)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">🏢</text>
+      <text class="card-text" x="76" y="67">Fournisseurs</text>
+    </g>
+    <g transform="translate(280,140)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">🚤</text>
+      <text class="card-text" x="76" y="67">Locations</text>
+    </g>
+    <g transform="translate(560,140)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">👤</text>
+      <text class="card-text" x="76" y="67">Membres</text>
+    </g>
+    <g transform="translate(840,140)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">📅</text>
+      <text class="card-text" x="76" y="67">Planning</text>
+    </g>
+
+    <g transform="translate(0,280)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">📎</text>
+      <text class="card-text" x="76" y="67">Documents</text>
+    </g>
+    <g transform="translate(280,280)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">🛠️</text>
+      <text class="card-text" x="76" y="67">Historique</text>
+    </g>
+    <g transform="translate(560,280)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">📊</text>
+      <text class="card-text" x="76" y="67">Statistiques</text>
+    </g>
+    <g transform="translate(840,280)">
+      <rect class="card" width="260" height="110"/>
+      <text class="card-icon" x="24" y="62">💾</text>
+      <text class="card-text" x="76" y="67">Sauvegarde</text>
+    </g>
+  </g>
+</svg>
