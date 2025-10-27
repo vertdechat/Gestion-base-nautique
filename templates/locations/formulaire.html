@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block title %}Nouvelle location{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Nouvelle location pour {{ bateau.nom }}</h2>
+
+<form method="post" class="row g-3">
+  <input type="hidden" name="bateau_id" value="{{ bateau.id }}">
+
+  <div class="col-md-6">
+    <label class="form-label">Membre locataire</label>
+    <select name="membre_id" class="form-select" required>
+      <option value="" disabled selected>Choisir un membre</option>
+      {% for m in membres %}
+        <option value="{{ m.id }}">{{ m.nom }} {{ m.prenom }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Date/heure début</label>
+    <input type="datetime-local" name="debut" class="form-control" required>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Date/heure fin</label>
+    <input type="datetime-local" name="fin" class="form-control" required>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-success">Démarrer la location</button>
+    <a href="/locations/liste" class="btn btn-secondary">Annuler</a>
+  </div>
+</form>
+{% endblock %}

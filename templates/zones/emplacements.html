@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% block title %}Emplacements – {{ zone.nom }}{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📍 Emplacements de la zone <span class="badge" style="background-color: {{ zone.couleur }}">{{ zone.nom }}</span></h2>
+
+<!-- Formulaire d'ajout -->
+<form method="post" action="/zones/{{ zone.id }}/emplacements/ajouter" class="row g-3 mb-4">
+  <div class="col-md-3">
+    <input type="text" name="nom" class="form-control" placeholder="Nom de l'emplacement" required>
+  </div>
+  <div class="col-md-2">
+    <select name="type" class="form-select" required>
+      <option value="" disabled selected>Type</option>
+      <option value="port">Port</option>
+      <option value="terrain">Terrain</option>
+    </select>
+  </div>
+  <div class="col-md-5">
+    <input type="text" name="remarque" class="form-control" placeholder="Remarque (optionnelle)">
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-success w-100">➕ Ajouter</button>
+  </div>
+</form>
+
+<!-- Tableau des emplacements -->
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Nom</th>
+      <th>Type</th>
+      <th>Statut</th>
+      <th>Bateau</th>
+      <th>Remarque</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in emplacements %}
+    <tr>
+      <td>{{ e.nom }}</td>
+      <td>{{ e.type }}</td>
+      <td>{% if e.disponible %}🟢 Disponible{% else %}🔴 Occupé{% endif %}</td>
+      <td>{% if e.nom_bateau %}<a href="/bateaux/{{ e.bateau_id }}">{{ e.nom_bateau }}</a>{% else %}—{% endif %}</td>
+      <td>{{ e.remarque or '—' }}</td>
+      <td>
+        <a href="/emplacements/modifier/{{ e.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
+        <a href="/emplacements/supprimer/{{ e.id }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer cet emplacement ?')">🗑️</a>
+        {% if e.bateau_id %}
+        <a href="/emplacements/detacher/{{ e.id }}" class="btn btn-sm btn-outline-warning">↩️ Libérer</a>
+      {% else %}
+        <a href="/emplacements/assigner/{{ e.id }}" class="btn btn-sm btn-outline-success">✅ Assigner</a>
+      {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="/zones/liste" class="btn btn-secondary mt-4">⬅️ Retour à la liste des zones</a>
+{% endblock %}

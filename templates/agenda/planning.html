@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block title %}Planning{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📅 Planning des événements</h2>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-3">
+      <label class="form-label">À partir du</label>
+      <input type="date" name="date_min" class="form-control" value="{{ date_min }}">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Jusqu’au</label>
+      <input type="date" name="date_max" class="form-control" value="{{ date_max }}">
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+      <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+    </div>
+  </form>
+
+<div class="d-flex justify-content-end mb-3">
+  <a href="/agenda/ajouter" class="btn btn-success">➕ Ajouter un événement</a>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Date</th>
+      <th>Heure</th>
+      <th>Titre</th>
+      <th>Annotation</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in evenements %}
+    <tr>
+      <td>{{ e.date }}</td>
+      <td>
+        {{ e.heure_debut or '—' }} {% if e.heure_fin %}→ {{ e.heure_fin }}{% endif %}
+      </td>
+      <td>{{ e.titre }}</td>
+      <td>{{ e.annotation or '—' }}</td>
+      <td>
+        <a href="/agenda/modifier/{{ e.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
+        <form method="post" action="/agenda/supprimer/{{ e.id }}" style="display:inline;" onsubmit="return confirm('Supprimer cet événement ?')">
+          <button class="btn btn-sm btn-outline-danger">🗑️</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if evenements|length == 0 %}
+  <div class="alert alert-info">Aucun événement prévu.</div>
+{% endif %}
+{% endblock %}

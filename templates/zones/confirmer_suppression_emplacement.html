@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block title %}Supprimer un emplacement{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-danger">❌ Supprimer un emplacement</h2>
+
+<div class="alert alert-warning">
+  {% if bateau %}
+    Cet emplacement est actuellement occupé par le bateau <strong>{{ bateau.nom }}</strong>.<br>
+    Êtes-vous sûr de vouloir le supprimer ?
+  {% else %}
+    Voulez-vous vraiment supprimer l’emplacement <strong>{{ emplacement.nom }}</strong> ?
+  {% endif %}
+</div>
+
+<form method="post">
+  <button type="submit" class="btn btn-danger">🗑️ Confirmer la suppression</button>
+  <a href="/zones/{{ emplacement.zone_id }}/emplacements" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

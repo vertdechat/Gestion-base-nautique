@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}Historique des locations{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📚 Historique des locations terminées</h2>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Bateau</th>
+      <th>Locataire</th>
+      <th>Début</th>
+      <th>Fin</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for l in locations %}
+    <tr>
+      <td>{{ l.nom_bateau }}</td>
+      <td>{{ l.nom_membre }} {{ l.prenom_membre }}</td>
+      <td>{{ l.debut }}</td>
+      <td>{{ l.fin }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if locations|length == 0 %}
+  <div class="alert alert-info">Aucune location terminée pour le moment.</div>
+{% endif %}
+
+<a href="/locations/liste" class="btn btn-secondary mt-4">⬅️ Retour à la liste des bateaux</a>
+{% endblock %}

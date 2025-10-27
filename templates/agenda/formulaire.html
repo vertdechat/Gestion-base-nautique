@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block title %}
+  {% if evenement %}Modifier un événement{% else %}Ajouter un événement{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">
+  {% if evenement %}✏️ Modifier un événement{% else %}➕ Ajouter un événement{% endif %}
+</h2>
+
+
+
+<form method="post" class="row g-3">
+  <div class="col-md-8">
+    <label class="form-label">Titre *</label>
+    <input type="text" name="titre" class="form-control" required value="{{ evenement.titre if evenement else '' }}">
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">Date *</label>
+    <input type="date" name="date" class="form-control" required value="{{ evenement.date if evenement else '' }}">
+  </div>
+
+  <div class="col-md-2">
+    <label class="form-label">Début</label>
+    <input type="time" name="heure_debut" class="form-control" value="{{ evenement.heure_debut if evenement else '' }}">
+  </div>
+
+  <div class="col-md-2">
+    <label class="form-label">Fin</label>
+    <input type="time" name="heure_fin" class="form-control" value="{{ evenement.heure_fin if evenement else '' }}">
+  </div>
+
+  <div class="col-md-12">
+    <label class="form-label">Annotation</label>
+    <textarea name="annotation" class="form-control" rows="3">{{ evenement.annotation if evenement else '' }}</textarea>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    <a href="/agenda/planning" class="btn btn-secondary">Annuler</a>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}Modifier un emplacement{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">✏️ Modifier l'emplacement : {{ emplacement.nom }}</h2>
+
+<form method="post" class="row g-3">
+  <div class="col-md-4">
+    <label class="form-label">Nom</label>
+    <input type="text" class="form-control" name="nom" value="{{ emplacement.nom }}" required>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Type</label>
+    <select name="type" class="form-select">
+      <option value="port" {% if emplacement.type == 'port' %}selected{% endif %}>Port</option>
+      <option value="terrain" {% if emplacement.type == 'terrain' %}selected{% endif %}>Terrain</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Disponible</label><br>
+    <input type="checkbox" class="form-check-input" name="disponible" {% if emplacement.disponible %}checked{% endif %}>
+    <label class="form-check-label">Oui</label>
+  </div>
+  <div class="col-md-8">
+    <label class="form-label">Remarque</label>
+    <input type="text" class="form-control" name="remarque" value="{{ emplacement.remarque }}">
+  </div>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
+    <a href="/zones/{{ emplacement.zone_id }}/emplacements" class="btn btn-secondary">Annuler</a>
+  </div>
+</form>
+{% endblock %}

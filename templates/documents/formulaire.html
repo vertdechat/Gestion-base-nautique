@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block title %}Ajouter un document{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">➕ Ajouter un document</h2>
+
+<form method="post" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Titre *</label>
+    <input type="text" name="titre" class="form-control" required>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Fichier *</label>
+    <input type="file" name="fichier" class="form-control" required>
+  </div>
+
+  <div class="col-md-12">
+    <label class="form-label">Commentaire (facultatif)</label>
+    <textarea name="commentaire" class="form-control" rows="3"></textarea>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    <a href="/documents/liste" class="btn btn-secondary">Annuler</a>
+  </div>
+</form>
+{% endblock %}

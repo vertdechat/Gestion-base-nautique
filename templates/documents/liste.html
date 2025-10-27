@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% block title %}Documents{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📎 Documents</h2>
+
+
+  
+
+<form method="get" class="row g-3 mb-3">
+  <div class="col-md-6">
+    <input type="text" name="recherche" class="form-control" placeholder="🔍 Rechercher par titre ou commentaire..." value="{{ recherche }}">
+  </div>
+  <div class="col-md-3">
+    <select name="type" class="form-select">
+      <option value="tous" {% if type == 'tous' %}selected{% endif %}>Tous les types</option>
+      <option value="pdf" {% if type == 'pdf' %}selected{% endif %}>PDF</option>
+      <option value="image" {% if type == 'image' %}selected{% endif %}>Image</option>
+      <option value="word" {% if type == 'word' %}selected{% endif %}>Word</option>
+      <option value="excel" {% if type == 'excel' %}selected{% endif %}>Excel</option>
+      <option value="autre" {% if type == 'autre' %}selected{% endif %}>Autre</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <button type="submit" class="btn btn-primary w-100">Rechercher</button>
+  </div>
+  <div class="col-md-3 text-end">
+    <a href="/documents/ajouter" class="btn btn-success w-100">➕ Ajouter un document</a>
+  </div>
+</form>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Titre</th>
+      <th>Commentaire</th>
+      <th>Fichier</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+{% set types_affichables = ['application/pdf', 'image/png', 'image/jpeg', 'image/webp', 'text/plain'] %}
+
+{% for doc in documents %}
+  <tr>
+    <td>{{ doc.titre }}</td>
+    <td>{{ doc.commentaire or '—' }}</td>
+    <td>
+      <a href="{{ url_for('voir_document_libre', id=doc.id) }}"
+         {% if doc.type in types_affichables %}target="_blank"{% endif %}>
+         📄 Voir
+      </a>
+    </td>
+    <td>{{ doc.date_upload[:10] }}</td>
+    <td>
+      <form method="post" action="{{ url_for('supprimer_document_libre', id=doc.id) }}"
+            onsubmit="return confirm('Supprimer ce document ?')">
+        <button class="btn btn-sm btn-outline-danger">🗑️</button>
+      </form>
+    </td>
+  </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+
+{% if documents|length == 0 %}
+  <div class="alert alert-info">Aucun document trouvé.</div>
+{% endif %}
+{% endblock %}

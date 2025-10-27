@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+{% block title %}Paiements du port{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">💰 Paiements du port — Année {{ annee }}</h2>
+
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-2">
+    <label class="form-label">Année</label>
+    <select name="annee" class="form-select">
+      {% set annee_actuelle = now().year %}
+      {% for a in range(annee_actuelle, annee_actuelle - 4, -1) %}
+        <option value="{{ a }}" {% if a == annee %}selected{% endif %}>{{ a }}</option>
+      {% endfor %}
+    </select>
+    
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Statut</label>
+    <select name="statut" class="form-select">
+      <option value="tous" {% if statut == 'tous' %}selected{% endif %}>Tous</option>
+      <option value="à_jour" {% if statut == 'à_jour' %}selected{% endif %}>À jour</option>
+      <option value="pas_a_jour" {% if statut == 'pas_a_jour' %}selected{% endif %}>Pas à jour</option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">Recherche</label>
+    <input type="text" name="recherche" class="form-control" placeholder="Nom du bateau ou du propriétaire" value="{{ recherche }}">
+  </div>
+
+  <div class="col-md-3 d-flex align-items-end">
+    <button type="submit" class="btn btn-primary w-100">🔍 Filtrer</button>
+  </div>
+</form>
+
+<table class="table table-striped table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th>Nom du bateau</th>
+      <th>Propriétaire</th>
+      <th>Statut</th>
+      <th>Type de paiement</th>
+      <th>Date de paiement</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for b in bateaux %}
+    <tr>
+      <td><a href="/bateaux/{{ b.id }}">{{ b.nom }}</a></td>
+      <td>{{ b.nom_proprietaire or '—' }}</td>
+      <td>
+        {% if b.est_a_jour %}
+          ✅ À jour
+        {% else %}
+          ❌ Pas à jour
+        {% endif %}
+      </td>
+      <td>{{ b.mode_paiement or '—' }}</td>
+      <td>{{ b.date_paiement or '—' }}</td>
+      <td>
+        {% if b.est_a_jour %}
+          <a href="/paiements/reinitialiser/{{ b.id }}?annee={{ annee }}" class="btn btn-sm btn-warning">↩️ Réinitialiser</a>
+        {% else %}
+          <button type="button" class="btn btn-sm btn-success" onclick="openPaiementModal({{ b.id }}, {{ annee }})">✅ Mettre à jour</button>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if bateaux|length == 0 %}
+  <div class="alert alert-info">Aucun bateau trouvé pour ces critères.</div>
+{% endif %}
+
+<!-- Modal paiement -->
+<div class="modal fade" id="paiementModal" tabindex="-1" aria-labelledby="paiementModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="/paiements/valider">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paiementModalLabel">Valider une cotisation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="bateau_id" id="modalBateauId">
+          <input type="hidden" name="annee" id="modalAnnee">
+          <label class="form-label">Mode de paiement</label>
+          <select name="mode_paiement" class="form-select" required>
+            <option value="" disabled selected>Choisir un mode</option>
+            <option value="chèque">Chèque</option>
+            <option value="liquide">Liquide</option>
+            <option value="virement">Virement</option>
+            <option value="carte">Carte</option>
+            <option value="helloasso">helloasso</option>
+            <option value="offert">Offert</option>
+            <option value="autre">autre</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">✅ Valider</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openPaiementModal(bateauId, annee) {
+    const modal = new bootstrap.Modal(document.getElementById('paiementModal'));
+    document.getElementById('modalBateauId').value = bateauId;
+    document.getElementById('modalAnnee').value = annee;
+    modal.show();
+  }
+</script>
+
+{% endblock %}

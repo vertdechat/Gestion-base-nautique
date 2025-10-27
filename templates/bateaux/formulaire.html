@@ -1,0 +1,147 @@
+{% extends 'layout.html' %}
+{% block title %}Ajouter un bateau{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🛥️ {{ "Modifier" if modifier else "Ajouter" }} un bateau</h2>
+
+<form method="post" enctype="multipart/form-data" class="row g-3">
+
+  <div class="col-md-6">
+    <label class="form-label">Nom du bateau</label>
+    <input type="text" name="nom" class="form-control" value="{{ bateau.nom if bateau else '' }}" required>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Propriétaire (membre)</label>
+    <select name="nom_proprietaire" class="form-select" required>
+      <option value="">— Sélectionner un membre —</option>
+      {% for m in membres %}
+        {% set full_name = m.nom ~ " " ~ m.prenom %}
+        <option value="{{ full_name }}"
+          {% if bateau and bateau.nom_proprietaire == full_name %}selected{% endif %}>
+          {{ full_name }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+  
+
+  <div class="col-md-6">
+    <label class="form-label">Constructeur / Modèle</label>
+    <input type="text" name="constructeur_modele" class="form-control" value="{{ bateau.constructeur_modele if bateau else '' }}">
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Type</label>
+    <select name="type" class="form-select">
+      {% for t in ['voile', 'dériveur', 'moteur', 'catamaran', 'autre'] %}
+        <option value="{{ t }}" {% if bateau and bateau.type == t %}selected{% endif %}>{{ t|capitalize }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Taille (m)</label>
+    <input type="number" step="0.01" name="taille" class="form-control" value="{{ bateau.taille if bateau else '' }}">
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Couleur coque</label>
+    <input type="text" name="couleur_coque" class="form-control" value="{{ bateau.couleur_coque if bateau else '' }}">
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Couleur pont</label>
+    <input type="text" name="couleur_pont" class="form-control" value="{{ bateau.couleur_pont if bateau else '' }}">
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Année</label>
+    <input type="number" name="annee" class="form-control" value="{{ bateau.annee if bateau else '' }}">
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Catégorie</label>
+    <select name="categorie" class="form-select">
+      {% for c in ['A-1','A-2','A-6','B-2','B-3','B-4','C-3','C-4','C-5','C-6','D-5','D-6'] %}
+        <option value="{{ c }}" {% if bateau and bateau.categorie == c %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Immatriculation</label>
+    <input type="text" name="immatriculation" class="form-control" value="{{ bateau.immatriculation if bateau else '' }}">
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Numéro de voile</label>
+    <input type="text" name="numero_voile" class="form-control" value="{{ bateau.numero_voile if bateau else '' }}">
+  </div>
+
+  <div class="col-md-3">
+    <label class="form-label">Date d’arrivée au club</label>
+    <input type="date" name="date_arrivee" class="form-control" value="{{ bateau.date_arrivee if bateau else '' }}">
+  </div>
+
+  <div class="col-md-12">
+    <label class="form-label">Remarques</label>
+    <textarea name="remarques" class="form-control">{{ bateau.remarques if bateau else '' }}</textarea>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Assurance - Nom</label>
+    <input type="text" name="assurance_nom" class="form-control" value="{{ bateau.assurance_nom if bateau else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Assurance - Numéro</label>
+    <input type="text" name="assurance_numero" class="form-control" value="{{ bateau.assurance_numero if bateau else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Assurance - Coordonnées</label>
+    <input type="text" name="assurance_coordonnees" class="form-control" value="{{ bateau.assurance_coordonnees if bateau else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Assurance - Téléphone</label>
+    <input type="text" name="assurance_tel" class="form-control" value="{{ bateau.assurance_tel if bateau else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Photo</label>
+    <input type="file" name="photo" class="form-control">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Document .docx</label>
+    <input type="file" name="docx" class="form-control">
+  </div>
+
+  <div class="col-md-3 form-check mt-4">
+    <input class="form-check-input" type="checkbox" name="est_du_club" {% if bateau and bateau.est_du_club %}checked{% endif %}>
+    <label class="form-check-label">Bateau du club</label>
+  </div>
+
+  <div class="col-md-3 form-check mt-4">
+    <input class="form-check-input" type="checkbox" name="remorque_au_club" {% if bateau and bateau.remorque_au_club %}checked{% endif %}>
+    <label class="form-check-label">Remorque au club</label>
+  </div>
+
+  <div class="col-12 text-end mt-4">
+    <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
+    <a href="/bateaux/liste" class="btn btn-secondary">Annuler</a>
+  </div>
+
+</form>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock %}

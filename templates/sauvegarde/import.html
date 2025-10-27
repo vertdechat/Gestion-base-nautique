@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block title %}Importer une sauvegarde{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">⬆️ Importer une sauvegarde</h2>
+
+<form method="post" enctype="multipart/form-data" class="mb-4" onsubmit="return confirm('⚠️ Cette opération va écraser les données actuelles. Confirmer ?')">
+    <div class="mb-3">
+      <label class="form-label">Fichier ZIP</label>
+      <input type="file" name="fichier_zip" accept=".zip" class="form-control" required>
+    </div>
+  
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="confirmer" id="confirmer" required>
+      <label class="form-check-label" for="confirmer">
+        Je confirme que je veux écraser les données actuelles
+      </label>
+    </div>
+  
+    <button type="submit" class="btn btn-danger">⚠️ Importer la sauvegarde</button>
+    <a href="/sauvegarde" class="btn btn-secondary">Annuler</a>
+  </form>
+  
+
+<div class="alert alert-warning">
+  ⚠️ Cette action va remplacer tout le contenu du dossier <strong>data/</strong> actuel.
+</div>
+{% endblock %}

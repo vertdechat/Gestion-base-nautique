@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+{% block title %}Locations{% endblock %}
+
+{% block content %}
+<div class="mb-3 text-end">
+  <a href="/locations/historique" class="btn btn-outline-dark">📚 Voir l'historique des locations</a>
+</div>
+
+<h2 class="mb-4">Locations en cours</h2>
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Bateau</th>
+      <th>Locataire</th>
+      <th>Début</th>
+      <th>Fin</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for loc in locations_encours %}
+    <tr>
+      <td>{{ loc.nom_bateau }}</td>
+      <td>{{ loc.nom_membre }} {{ loc.prenom_membre }}</td>
+      <td>{{ loc.debut }}</td>
+      <td>{{ loc.fin }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if locations_encours|length == 0 %}
+<div class="alert alert-info">Aucune location en cours</div>
+{% endif %}
+
+<hr class="my-4">
+
+<h2 class="mb-4">Bateaux du club</h2>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Nom</th>
+      <th>Modèle</th>
+      <th>Statut</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for b in bateaux %}
+    <tr>
+      <td><a href="/bateaux/{{ b.id }}">{{ b.nom }}</a></td>
+      <td>{{ b.constructeur_modele or '—' }}</td>
+      <td>
+        {% if b.indisponible %}
+          Indisponible
+        {% elif b.location_id %}
+          En location
+        {% else %}
+          Disponible
+        {% endif %}
+      </td>
+      <td>
+        {% if b.indisponible %}
+          <form action="/locations/toggle_dispo/{{ b.id }}" method="post" style="display:inline;">
+            <button class="btn btn-sm btn-outline-warning">Rendre dispo</button>
+          </form>
+        {% elif b.location_id %}
+          <a href="/locations/{{ b.location_id }}" class="btn btn-sm btn-outline-primary">Voir location</a>
+        {% else %}
+          <form action="/locations/toggle_dispo/{{ b.id }}" method="post" style="display:inline;">
+            <button class="btn btn-sm btn-outline-danger me-1">Rendre indispo</button>
+          </form>
+          <a href="/locations/ajouter?bateau_id={{ b.id }}" class="btn btn-sm btn-success">Louer</a>
+        {% endif %}
+      </td>
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if bateaux|length == 0 %}
+<div class="alert alert-info">Aucun bateau du club</div>
+{% endif %}
+{% endblock %}

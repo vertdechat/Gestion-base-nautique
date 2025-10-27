@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block title %}Assigner un bateau{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Assigner un bateau à l'emplacement {{ emplacement.nom }}</h2>
+
+<form method="post">
+  <label class="form-label">Choisir un bateau</label>
+  <select name="bateau_id" class="form-select mb-3" required>
+    <option value="" disabled selected>---</option>
+    {% for b in bateaux %}
+      <option value="{{ b.id }}">{{ b.nom }}</option>
+    {% endfor %}
+  </select>
+
+  <button type="submit" class="btn btn-success">Assigner</button>
+  <a href="/zones/{{ emplacement.zone_id }}/emplacements" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

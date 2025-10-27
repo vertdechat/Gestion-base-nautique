@@ -1,0 +1,275 @@
+{% extends 'layout.html' %}
+{% block title %}Fiche maintenance{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-end mb-3">
+  <a href="/maintenance/liste" class="btn btn-secondary">⬅️ Retour à la liste</a>
+</div>
+
+<h2 class="mb-3">🛠️ {{ maintenance.titre }}</h2>
+
+<div class="table-responsive">
+  <table class="table table-bordered w-100 mx-auto">
+  <tbody>
+    <tr>
+      <th>Bateau</th>
+      <td>{{ maintenance.nom_bateau or '—' }}</td>
+    </tr>
+    <tr>
+        <th>Catégorie</th>
+        <td>
+          <form method="post" action="/maintenance/{{ maintenance.id }}/modifier_categorie" class="d-flex">
+            <select name="categorie" class="form-select me-2">
+              {% for cat in categories %}
+                <option value="{{ cat }}" {% if maintenance.categorie == cat %}selected{% endif %}>{{ cat }}</option>
+              {% endfor %}
+            </select>
+            <button class="btn btn-outline-primary">Modifier</button>
+          </form>
+        </td>
+      </tr>
+    <tr>
+      <th>Statut</th>
+      <td>
+        <form method="post" action="/maintenance/{{ maintenance.id }}/modifier_statut" class="d-flex">
+          <select name="statut" class="form-select me-2">
+            {% for s in ['planifiée', 'en cours', 'clôturée'] %}
+              <option value="{{ s }}" {% if maintenance.statut == s %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+          </select>
+          <button class="btn btn-outline-primary">Modifier</button>
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <th>Priorité</th>
+      <td>
+        <form method="post" action="/maintenance/{{ maintenance.id }}/modifier_priorite" class="d-flex">
+          <select name="priorite" class="form-select me-2">
+            {% for p in ['basse', 'normale', 'haute'] %}
+              <option value="{{ p }}" {% if maintenance.priorite == p %}selected{% endif %}>{{ p }}</option>
+            {% endfor %}
+          </select>
+          <button class="btn btn-outline-primary">Modifier</button>
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>
+        <form method="post" action="/maintenance/{{ maintenance.id }}/modifier_description" class="d-flex flex-column">
+          <textarea name="description" class="form-control mb-2" rows="3">{{ maintenance.description or '' }}</textarea>
+          <button class="btn btn-outline-primary align-self-start">Modifier</button>
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <th>Date création</th>
+      <td>{{ maintenance.date_creation[:10] }}</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+<h4 class="mt-4">📋 Tâches</h4>
+<ul>
+  {% for t in taches %}
+    <li>
+      {{ t.description }} —
+      {% if t.nom_membre %}assignée à {{ t.nom_membre }}{% else %}<em>non assignée</em>{% endif %} —
+      <strong>{{ t.statut }}</strong>
+      <div class="mt-1">
+        <a href="/maintenance/taches/modifier/{{ t.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
+        <form method="post" action="/maintenance/taches/supprimer/{{ t.id }}" style="display:inline;" onsubmit="return confirm('Supprimer cette tâche ?')">
+          <button class="btn btn-sm btn-outline-danger">🗑️</button>
+        </form>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+
+<h5 class="mt-4">➕ Ajouter une tâche</h5>
+<form method="post" action="/maintenance/{{ maintenance.id }}/taches/ajouter" class="row g-3">
+  <div class="col-md-6">
+    <input type="text" name="description" class="form-control" placeholder="Description de la tâche" required>
+  </div>
+  <div class="col-md-3">
+    <select name="statut" class="form-select">
+      <option value="à faire" selected>À faire</option>
+      <option value="en cours">En cours</option>
+      <option value="terminée">Terminée</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select name="membre_id" class="form-select">
+      <option value="">Aucun membre</option>
+      {% for m in membres %}
+        <option value="{{ m.id }}">{{ m.nom }} {{ m.prenom }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <select name="fournisseur_id" class="form-select">
+      <option value="">Aucun fournisseur</option>
+      {% for f in fournisseurs %}
+        <option value="{{ f.id }}">{{ f.nom }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-primary">Ajouter la tâche</button>
+  </div>
+</form>
+
+<h4 class="mt-4">🔧 Pièces</h4>
+<ul>
+  {% for p in pieces %}
+    <li>
+      {{ p.nom }} ({{ p.quantite }}) — {{ p.statut_commande }}{% if p.fournisseur %} — {{ p.fournisseur }}{% endif %}
+      <div class="mt-1">
+        <a href="/maintenance/pieces/modifier/{{ p.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
+        <form method="post" action="/maintenance/pieces/supprimer/{{ p.id }}" style="display:inline;" onsubmit="return confirm('Supprimer cette pièce ?')">
+          <button class="btn btn-sm btn-outline-danger">🗑️</button>
+        </form>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+
+<h5 class="mt-4">➕ Ajouter une pièce</h5>
+<form method="post" action="/maintenance/{{ maintenance.id }}/pieces/ajouter" class="row g-3">
+  <div class="col-md-5">
+    <input type="text" name="nom" class="form-control" placeholder="Nom de la pièce" required>
+  </div>
+  <div class="col-md-2">
+    <input type="number" name="quantite" class="form-control" placeholder="Quantité" value="1" min="1">
+  </div>
+  <div class="col-md-3">
+    <select name="statut" class="form-select">
+      {% for s in ['à commander', 'commandée', 'reçue', 'installée'] %}
+        <option value="{{ s }}">{{ s }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <select name="fournisseur_id" class="form-select">
+      <option value="">Aucun fournisseur</option>
+      {% for f in fournisseurs %}
+        <option value="{{ f.id }}">{{ f.nom }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-primary">Ajouter la pièce</button>
+  </div>
+</form>
+
+<h4 class="mt-4">📎 Documents</h4>
+<ul>
+  {% for d in documents %}
+    <li>
+       {% set extensions_affichables = ['pdf', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'txt', 'csv', 'json', 'xml', 'html'] %}
+		{% set extension = d.nom.rsplit('.', 1)[-1].lower() %}
+
+		{% if extension in extensions_affichables %}
+		  <a href="/maintenance/documents/voir/{{ d.id }}" target="_blank">{{ d.nom }}</a>
+		{% else %}
+		  <a href="/maintenance/documents/voir/{{ d.id }}">{{ d.nom }}</a>
+		{% endif %}
+
+      <form method="post" action="/maintenance/documents/supprimer/{{ d.id }}" style="display:inline;" onsubmit="return confirm('Supprimer ce document ?')">
+        <button class="btn btn-sm btn-outline-danger ms-2">🗑️</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+
+<h5 class="mt-4">➕ Ajouter un document</h5>
+<form method="post" action="/maintenance/{{ maintenance.id }}/documents/ajouter" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-8">
+    <input type="file" name="fichier" class="form-control" required>
+  </div>
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-primary">Uploader</button>
+  </div>
+</form>
+
+<h4 class="mt-4">📷 Photos</h4>
+<div class="row">
+  {% for photo in photos %}
+    <div class="col-md-3 mb-3">
+        <a href="/maintenance/photos/voir/{{ photo.id }}" target="_blank">
+            <img src="/maintenance/photos/voir/{{ photo.id }}" class="img-fluid rounded" alt="Photo maintenance">
+          </a>         
+      <small class="d-block">{{ photo.commentaire }}</small>
+      <form method="post" action="/maintenance/photos/supprimer/{{ photo.id }}" onsubmit="return confirm('Supprimer cette photo ?')">
+        <button class="btn btn-sm btn-outline-danger mt-1">🗑️</button>
+      </form>
+    </div>
+  {% endfor %}
+</div>
+
+<h5 class="mt-4">➕ Ajouter une photo</h5>
+<form method="post" action="/maintenance/{{ maintenance.id }}/photos/ajouter" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-8">
+    <input type="file" name="photo" class="form-control" accept="image/*" required>
+  </div>
+  <div class="col-md-4">
+    <input type="text" name="commentaire" class="form-control" placeholder="Commentaire (facultatif)">
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Uploader</button>
+  </div>
+</form>
+
+</div>
+
+<h4 class="mt-4">💬 Commentaires</h4>
+<ul>
+    {% for c in commentaires %}
+    <li>
+      <strong>{{ c.auteur or '—' }}</strong> ({{ c.date[:10] }}) : {{ c.texte }}
+      <form method="post" action="/maintenance/commentaires/supprimer/{{ c.id }}" style="display:inline;" onsubmit="return confirm('Supprimer ce commentaire ?')">
+        <button class="btn btn-sm btn-outline-danger ms-2">🗑️</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+<h5 class="mt-4">➕ Ajouter un commentaire</h5>
+<form method="post" action="/maintenance/{{ maintenance.id }}/commentaires/ajouter" class="row g-3">
+  <div class="col-md-6">
+    <input type="text" name="auteur" class="form-control" placeholder="Votre nom (facultatif)">
+  </div>
+  <div class="col-md-12">
+    <textarea name="texte" class="form-control" placeholder="Votre commentaire" rows="3" required></textarea>
+  </div>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  </div>
+</form>
+
+<h4 class="mt-4">🏷️ Tags</h4>
+<form method="post" action="/maintenance/{{ maintenance.id }}/tags/modifier">
+  <div class="mb-2">
+    {% for t in tous_les_tags %}
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="tags" value="{{ t.id }}" id="tag{{ t.id }}"
+          {% if t.id in tags_ids %}checked{% endif %}>
+        <label class="form-check-label" for="tag{{ t.id }}">{{ t.nom }}</label>
+      </div>
+    {% endfor %}
+  </div>
+  <button type="submit" class="btn btn-outline-primary btn-sm">Mettre à jour les tags</button>
+</form>
+
+<div class="d-flex justify-content-end mb-3">
+  <a href="/maintenance/liste" class="btn btn-secondary">⬅️ Retour à la liste</a>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

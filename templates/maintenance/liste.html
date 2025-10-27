@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% block title %}Liste des maintenances{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🛠️ Liste des maintenances</h2>
+
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-4">
+    <input type="text" name="recherche" class="form-control" placeholder="🔍 Titre, tag, catégorie..." value="{{ recherche }}">
+  </div>
+  <div class="col-md-3">
+    <select name="statut" class="form-select">
+      <option value="tous" {% if statut == 'tous' %}selected{% endif %}>Tous les statuts</option>
+      <option value="planifiée" {% if statut == 'planifiée' %}selected{% endif %}>Planifiée</option>
+      <option value="en cours" {% if statut == 'en cours' %}selected{% endif %}>En cours</option>
+      <option value="clôturée" {% if statut == 'clôturée' %}selected{% endif %}>Clôturée</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+  </div>
+  <div class="col-md-3 text-end">
+    <a href="/maintenance/ajouter" class="btn btn-success w-100">➕ Ajouter une maintenance</a>
+  </div>
+  <div class="col-md-3 text-end mt-2">
+    <a href="/maintenance/export_csv?recherche={{ recherche }}&statut={{ statut }}" class="btn btn-outline-success w-100">📄 Export CSV</a>
+  </div>
+</form>
+
+<table class="table table-striped table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th>Titre</th>
+      <th>Bateau</th>
+      <th>Catégorie</th>
+      <th>Priorité</th>
+      <th>Statut</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for m in maintenances %}
+    <tr>
+      <td>{{ m.titre }}</td>
+      <td>{{ m.nom_bateau or '—' }}</td>
+      <td>{{ m.categorie or '—' }}</td>
+      <td><span class="badge bg-{{ 'danger' if m.priorite == 'haute' else 'warning' if m.priorite == 'normale' else 'secondary' }}">{{ m.priorite }}</span></td>
+      <td><span class="badge bg-{{ 'primary' if m.statut == 'en cours' else 'success' if m.statut == 'clôturée' else 'light text-dark' }}">{{ m.statut }}</span></td>
+      <td>{{ m.date_creation[:10] }}</td>
+      <td>
+        <a href="/maintenance/{{ m.id }}" class="btn btn-sm btn-outline-primary">🔍 Voir</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if nb_pages > 1 %}
+<nav class="mt-4">
+  <ul class="pagination justify-content-center">
+    {% for p in range(1, nb_pages + 1) %}
+    <li class="page-item {% if p == page %}active{% endif %}">
+      <a class="page-link"
+         href="?recherche={{ recherche }}&statut={{ statut }}&page={{ p }}">{{ p }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
+
+{% if maintenances|length == 0 %}
+  <div class="alert alert-info">Aucune maintenance trouvée.</div>
+{% endif %}
+{% endblock %}

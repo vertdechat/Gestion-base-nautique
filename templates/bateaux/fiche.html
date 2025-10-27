@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block title %}Fiche bateau{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🛥️ {{ bateau.nom }}</h2>
+<div class="mt-4 text-end">
+  <a href="/bateaux/liste" class="btn btn-secondary">⬅️ Retour à la liste</a>
+  <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-warning">✏️ Modifier</a>
+  <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-outline-danger" onclick="return confirm('Supprimer ce bateau ?')">🗑 Supprimer</a>
+</div>
+{% if bateau.photo %}
+  <div class="mb-4">
+    <img src="{{ url_for('photo_bateau', bateau_id=bateau.id) }}" alt="Photo du bateau" class="img-fluid rounded border" style="max-height: 300px;">
+  </div>
+{% endif %}
+
+
+
+<div class="row">
+  <div class="col-md-6">
+    <p><strong>Propriétaire :</strong> {{ bateau.nom_proprietaire or '—' }}</p>
+    <p><strong>Club :</strong> {% if bateau.est_du_club %}✅ Oui{% else %}❌ Non{% endif %}</p>
+    <p><strong>Constructeur / Modèle :</strong> {{ bateau.constructeur_modele or '—' }}</p>
+    <p><strong>Type :</strong> {{ bateau.type or '—' }}</p>
+    <p><strong>Taille :</strong> {{ bateau.taille or '—' }} m</p>
+    <p><strong>Catégorie :</strong> {{ bateau.categorie or '—' }}</p>
+    <p><strong>Année :</strong> {{ bateau.annee or '—' }}</p>
+    <p><strong>Immatriculation :</strong> {{ bateau.immatriculation or '—' }}</p>
+    <p><strong>Numéro de voile :</strong> {{ bateau.numero_voile or '—' }}</p>
+    <p><strong>Date d’arrivée :</strong> {{ bateau.date_arrivee or '—' }}</p>
+  </div>
+
+  <div class="col-md-6">
+    <p><strong>Couleur coque :</strong> {{ bateau.couleur_coque or '—' }}</p>
+    <p><strong>Couleur pont :</strong> {{ bateau.couleur_pont or '—' }}</p>
+    <p><strong>Remorque au club :</strong> {% if bateau.remorque_au_club %}✅ Oui{% else %}❌ Non{% endif %}</p>
+
+    <p><strong>Assurance :</strong></p>
+    <ul>
+      <li><strong>Nom :</strong> {{ bateau.assurance_nom or '—' }}</li>
+      <li><strong>Numéro :</strong> {{ bateau.assurance_numero or '—' }}</li>
+      <li><strong>Coordonnées :</strong> {{ bateau.assurance_coordonnees or '—' }}</li>
+      <li><strong>Téléphone :</strong> {{ bateau.assurance_tel or '—' }}</li>
+    </ul>
+
+    <p><strong>Remarques :</strong><br>{{ bateau.remarques or '—' }}</p>
+
+    <p><strong>Document :</strong>
+      {% if bateau.docx %}
+        <a href="{{ url_for('telecharger_docx', bateau_id=bateau.id) }}" >📄 Ouvrir</a>
+      {% else %}
+        — Aucun
+      {% endif %}
+    </p>
+  </div>
+</div>
+<br>
+<br>
+<br>
+
+{% endblock %}

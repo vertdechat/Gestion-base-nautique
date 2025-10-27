@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block title %}
+  {% if fournisseur %}Modifier fournisseur{% else %}Ajouter un fournisseur{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">
+  {% if fournisseur %}✏️ Modifier fournisseur{% else %}➕ Ajouter un fournisseur{% endif %}
+</h2>
+
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Nom *</label>
+    <input type="text" name="nom" class="form-control" required value="{{ fournisseur.nom if fournisseur else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">SIRET</label>
+    <input type="text" name="siret" class="form-control" value="{{ fournisseur.siret if fournisseur else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Site web</label>
+    <input type="url" name="site_web" class="form-control" value="{{ fournisseur.site_web if fournisseur else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Nom du contact</label>
+    <input type="text" name="contact" class="form-control" value="{{ fournisseur.contact if fournisseur else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Email</label>
+    <input type="email" name="email" class="form-control" value="{{ fournisseur.email if fournisseur else '' }}">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Téléphone</label>
+    <input type="text" name="telephone" class="form-control" value="{{ fournisseur.telephone if fournisseur else '' }}">
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    <a href="/fournisseurs/liste" class="btn btn-secondary">Annuler</a>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block title %}{% if modifier %}Modifier membre{% else %}Ajouter membre{% endif %}{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">{% if modifier %}✏️ Modifier le membre{% else %}➕ Ajouter un membre{% endif %}</h2>
+
+<form method="post" class="row g-3">
+  <div class="col-md-3">
+    <label class="form-label">Nom</label>
+    <input type="text" name="nom" class="form-control" required value="{{ membre.nom if membre else '' }}">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Prénom</label>
+    <input type="text" name="prenom" class="form-control" required value="{{ membre.prenom if membre else '' }}">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Tel1</label>
+    <input type="text" name="tel1" class="form-control" value="{{ membre.tel1 if membre else '' }}">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Tel2</label>
+    <input type="text" name="tel2" class="form-control" value="{{ membre.tel2 if membre else '' }}">
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Email</label>
+    <input type="email" name="email" class="form-control" value="{{ membre.email if membre else '' }}">
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Date d'inscription</label>
+    <input type="date" name="date_inscription" class="form-control" value="{{ membre.date_inscription if membre else '' }}">
+  </div>
+  <div class="col-md-4 form-check pt-4">
+    <input type="checkbox" class="form-check-input" name="cotisation_a_jour" id="cotisationCheck" {% if membre and membre.cotisation_a_jour %}checked{% endif %}>
+    <label class="form-check-label" for="cotisationCheck">Cotisation à jour</label>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Mode paiement</label>
+    <select name="mode_paiement" class="form-select">
+      <option value="" {% if not membre or not membre.mode_paiement %}selected{% endif %}>—</option>
+      {% for mode in ['chèque', 'liquide', 'virement', 'carte', 'offert', 'helloasso', 'autre'] %}
+        <option value="{{ mode }}" {% if membre and membre.mode_paiement == mode %}selected{% endif %}>{{ mode }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">
+      {% if modifier %}Enregistrer{% else %}Ajouter{% endif %}
+    </button>
+    <a href="/membres/liste" class="btn btn-secondary">Annuler</a>
+  </div>
+</form>
+{% endblock %}

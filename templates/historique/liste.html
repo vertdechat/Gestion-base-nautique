@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% block title %}Historique des actions{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📚 Historique des interventions</h2>
+
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-3">
+    <select name="type" class="form-select">
+      <option value="tous" {% if type == 'tous' %}selected{% endif %}>Tous les types</option>
+      <option value="maintenance" {% if type == 'maintenance' %}selected{% endif %}>Maintenance</option>
+      <option value="document" {% if type == 'document' %}selected{% endif %}>Document</option>
+      <option value="membre" {% if type == 'membre' %}selected{% endif %}>Membre</option>
+      <option value="bateau" {% if type == 'bateau' %}selected{% endif %}>Bateau</option>
+      <option value="planning" {% if type == 'planning' %}selected{% endif %}>Planning</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <input type="text" name="recherche" class="form-control" placeholder="🔍 Rechercher dans le résumé ou le commentaire..." value="{{ recherche }}">
+  </div>
+  <div class="col-md-3">
+    <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+  </div>
+</form>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Résumé</th>
+      <th>Commentaire</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for h in historiques %}
+    <tr>
+      <td>{{ h.date[:16].replace('T', ' ') }}</td>
+      <td>{{ h.type }}</td>
+      <td>{{ h.resume }}</td>
+      <td>{{ h.commentaire or '—' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="mt-4 text-center">
+  <nav>
+    <ul class="pagination justify-content-center">
+      {% for p in range(1, nb_pages + 1) %}
+      <li class="page-item {% if p == page %}active{% endif %}">
+        <a class="page-link"
+           href="?type={{ type }}&recherche={{ recherche }}&page={{ p }}">{{ p }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</div>
+
+
+{% if historiques|length == 0 %}
+  <div class="alert alert-info">Aucune entrée trouvée.</div>
+{% endif %}
+{% endblock %}

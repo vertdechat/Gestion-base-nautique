@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block title %}Supprimer la zone{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-danger">❌ Supprimer la zone "{{ zone.nom }}"</h2>
+
+<div class="alert alert-warning">
+  Cette opération supprimera également tous les emplacements associés à cette zone.<br>
+  Es-tu sûr de vouloir continuer ?
+</div>
+
+<form method="post">
+  <button type="submit" class="btn btn-danger">🗑️ Confirmer la suppression</button>
+  <a href="/zones/liste" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

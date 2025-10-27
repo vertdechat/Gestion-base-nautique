@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block title %}Modifier zone{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">✏️ Modifier la zone : {{ zone.nom }}</h2>
+
+<form method="post" class="row g-3">
+  <div class="col-md-4">
+    <label class="form-label">Nom</label>
+    <input type="text" class="form-control" name="nom" value="{{ zone.nom }}" required>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Type</label>
+    <select name="type" class="form-select">
+      <option value="port" {% if zone.type == 'port' %}selected{% endif %}>Port</option>
+      <option value="terrain" {% if zone.type == 'terrain' %}selected{% endif %}>Terrain</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Couleur</label>
+    <input type="color" class="form-control" name="couleur" value="{{ zone.couleur or '#cce5ff' }}">
+  </div>
+  <div class="col-md-2">
+    <label class="form-label">Nb emplacements</label>
+    <input type="number" class="form-control" name="nombre_places" value="{{ zone.nombre_places }}">
+  </div>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
+    <a href="/zones/liste" class="btn btn-secondary">Annuler</a>
+  </div>
+</form>
+{% endblock %}

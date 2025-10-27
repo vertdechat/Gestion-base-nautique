@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block title %}Fiche fournisseur{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🏢 {{ fournisseur.nom }}</h2>
+
+<table class="table table-bordered w-auto">
+  <tr><th>Contact</th><td>{{ fournisseur.contact or '—' }}</td></tr>
+  <tr><th>Email</th><td>{{ fournisseur.email or '—' }}</td></tr>
+  <tr><th>Téléphone</th><td>{{ fournisseur.telephone or '—' }}</td></tr>
+  <tr><th>SIRET</th><td>{{ fournisseur.siret or '—' }}</td></tr>
+  <tr><th>Site web</th>
+      <td>
+        {% if fournisseur.site_web %}
+          <a href="{{ fournisseur.site_web }}" target="_blank">{{ fournisseur.site_web }}</a>
+        {% else %}
+          —
+        {% endif %}
+      </td>
+  </tr>
+</table>
+
+<h4 class="mt-4">🔧 Pièces associées</h4>
+<table class="table table-sm table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Nom de la pièce</th>
+      <th>Quantité</th>
+      <th>Statut</th>
+      <th>Maintenance</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in pieces %}
+    <tr>
+      <td>{{ p.nom }}</td>
+      <td>{{ p.quantite }}</td>
+      <td>{{ p.statut_commande }}</td>
+      <td><a href="/maintenance/{{ p.maintenance_id }}">{{ p.titre_maintenance }}</a></td>
+      <td>{{ p.date_creation[:10] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if pieces|length == 0 %}
+  <div class="alert alert-info">Aucune pièce enregistrée pour ce fournisseur.</div>
+{% endif %}
+
+<a href="/fournisseurs/liste" class="btn btn-secondary mt-4">⬅️ Retour à la liste</a>
+{% endblock %}

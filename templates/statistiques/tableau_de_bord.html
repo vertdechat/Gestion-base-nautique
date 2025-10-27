@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% block title %}Tableau de bord{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📊 Tableau de bord — Statistiques</h2>
+
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card border-info">
+      <div class="card-body">
+        <h5 class="card-title">🚤 Bateaux</h5>
+        <p>Total : <strong>{{ total_bateaux }}</strong></p>
+        <p>Club : <strong>{{ club_bateaux }}</strong></p>
+        <p>Hors club : <strong>{{ hors_club_bateaux }}</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card border-secondary">
+      <div class="card-body">
+        <h5 class="card-title">📍 Emplacements</h5>
+        <p>Total : <strong>{{ total_emplacements }}</strong></p>
+        <p>Occupés : <strong>{{ emplacements_occupees }}</strong></p>
+        <p>Disponibles : <strong>{{ emplacements_disponibles }}</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card border-success">
+      <div class="card-body">
+        <h5 class="card-title">👤 Membres</h5>
+        <p>Total : <strong>{{ total_membres }}</strong></p>
+        <p>À jour : <strong>{{ membres_ajour }}</strong> ({{ pourcentage_membres_ajour }}%)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mt-3">
+  <div class="col-md-4">
+    <div class="card border-warning">
+      <div class="card-body">
+        <h5 class="card-title">💰 Cotisations bateaux ({{ annee }})</h5>
+        <p>Total : <strong>{{ total_cotisations }}</strong></p>
+        <p>À jour : <strong>{{ cotisations_ajour }}</strong> ({{ pourcentage_cotisations_ajour }}%)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card border-primary">
+      <div class="card-body">
+        <h5 class="card-title">🛠️ Maintenances</h5>
+        <p>En cours : <strong>{{ maintenances_en_cours }}</strong></p>
+        <p>Clôturées : <strong>{{ maintenances_cloturees }}</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card border-dark">
+      <div class="card-body">
+        <h5 class="card-title">📦 Par zone</h5>
+        {% for zone in zones %}
+          <p>{{ zone.zone }} : {{ zone.occupes }}/{{ zone.total }} occupés</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

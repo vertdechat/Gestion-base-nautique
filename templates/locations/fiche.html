@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block title %}Fiche location{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📄 Détails de la location</h2>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Bateau</th>
+    <td>{{ location.nom_bateau }}</td>
+  </tr>
+  <tr>
+    <th>Modèle</th>
+    <td>{{ location.constructeur_modele or '—' }}</td>
+  </tr>
+  <tr>
+    <th>Locataire</th>
+    <td>{{ location.nom_membre }} {{ location.prenom_membre }}</td>
+  </tr>
+  <tr>
+    <th>Date / Heure de début</th>
+    <td>{{ location.debut }}</td>
+  </tr>
+  <tr>
+    <th>Date / Heure de fin</th>
+    <td>{{ location.fin }}</td>
+  </tr>
+  <tr>
+    <th>Statut</th>
+    <td>
+      {% if location.annule %}
+        ❌ Annulée
+      {% elif location.fin < now().isoformat() %}
+        ✅ Terminée
+      {% else %}
+        🔄 En cours
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <th>Instructions de gréement</th>
+    <td>
+      {% if location.docx %}
+        <a href="/bateaux/{{ location.bateau_id }}/document" class="btn btn-sm btn-outline-info">📄 Consignes .docx</a>
+      {% else %}
+        —
+      {% endif %}
+    </td>
+  </tr>
+</table>
+
+<a href="/locations/liste" class="btn btn-secondary mt-3">⬅️ Retour à la liste</a>
+
+{% if not location.annule %}
+  <form method="post" action="/locations/annuler/{{ location.id }}" onsubmit="return confirm('Annuler cette location ?')">
+    <button type="submit" class="btn btn-danger mt-3">❌ Annuler la location</button>
+  </form>
+{% endif %}
+{% endblock %}

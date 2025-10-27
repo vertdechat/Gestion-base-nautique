@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Base Nautique{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap local -->
+  <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- CSS personnalisé -->
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+
+  <!-- En-tête avec logo et lien vers la page d'accueil -->
+  <header class="container d-flex align-items-center justify-content-start py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center text-decoration-none">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo du club" height="60" class="me-3">
+      <h1 class="h4 mb-0 text-dark">Gestion de la Base Nautique</h1>
+    </a>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Bootstrap JS local -->
+  <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

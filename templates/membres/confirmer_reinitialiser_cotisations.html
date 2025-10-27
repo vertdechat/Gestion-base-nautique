@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block title %}Réinitialiser les cotisations{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-danger">❌ Réinitialiser toutes les cotisations</h2>
+
+<div class="alert alert-warning">
+  Cette opération va passer tous les membres en "Pas à jour" et supprimer leur mode de paiement.<br>
+  Êtes-vous sûr de vouloir continuer ?
+</div>
+
+<form method="post">
+  <button type="submit" class="btn btn-danger">Confirmer la réinitialisation</button>
+  <a href="/membres/liste" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

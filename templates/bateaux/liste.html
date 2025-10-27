@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% block title %}Liste des bateaux{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🛥️ Liste des bateaux</h2>
+
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-4">
+    <input type="text" name="recherche" class="form-control" placeholder="Recherche nom / immatriculation / catégorie" value="{{ recherche }}">
+  </div>
+  <div class="col-md-3">
+    <select name="club" class="form-select">
+      <option value="tous" {% if club_filter == 'tous' %}selected{% endif %}>Tous</option>
+      <option value="club" {% if club_filter == 'club' %}selected{% endif %}>Club</option>
+      <option value="hors_club" {% if club_filter == 'hors_club' %}selected{% endif %}>Hors club</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+  </div>
+  <div class="col-md-3 text-end">
+    <a href="/bateaux/ajouter" class="btn btn-success w-100">➕ Ajouter un bateau</a>
+  </div>
+</form>
+
+<table class="table table-striped table-bordered align-middle">
+  <thead class="table-light">
+    <tr>
+      <th>Nom</th>
+      <th>Immatriculation</th>
+      <th>Modèle</th>
+      <th>Type</th>
+      <th>Catégorie</th>
+      <th>Année</th>
+      <th>Club</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for bateau in bateaux %}
+    <tr>
+      <td>{{ bateau.nom }}</td>
+      <td>{{ bateau.immatriculation or '—' }}</td>
+      <td>{{ bateau.constructeur_modele or '—' }}</td>
+      <td>{{ bateau.type or '—' }}</td>
+      <td>{{ bateau.categorie or '—' }}</td>
+      <td>{{ bateau.annee or '—' }}</td>
+      <td>{% if bateau.est_du_club %}✅{% else %}❌{% endif %}</td>
+      <td>
+        <a href="/bateaux/{{ bateau.id }}" class="btn btn-sm btn-outline-primary">🔍</a>
+        <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-sm btn-outline-warning">✏️</a>
+        <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer ce bateau ?')">🗑</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if nb_pages > 1 %}
+<nav class="mt-4">
+  <ul class="pagination justify-content-center">
+    {% for p in range(1, nb_pages + 1) %}
+    <li class="page-item {% if p == page %}active{% endif %}">
+      <a class="page-link"
+         href="?recherche={{ recherche }}&club={{ club_filter }}&page={{ p }}">{{ p }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
+
+
+{% if bateaux|length == 0 %}
+  <div class="alert alert-info">Aucun bateau trouvé.</div>
+{% endif %}
+
+<br>
+<br>
+<br>
+{% endblock %}
