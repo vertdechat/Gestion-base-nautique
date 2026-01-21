@@ -25,7 +25,7 @@
     <input type="number" name="nombre_places" class="form-control" placeholder="Nb places">
   </div>
   <div class="col-md-3">
-    <button type="submit" class="btn btn-ghost w-100">Ajouter une zone</button>
+    <button type="submit" class="btn btn-ghost btn-action btn-action-add w-100">Ajouter une zone</button>
   </div>
 </form>
 
@@ -50,8 +50,8 @@
         <a href="/zones/{{ zone.id }}/emplacements" class="btn btn-sm btn-outline-primary ms-2"> Gérer</a>
       </td>
       <td>
-        <a href="/zones/modifier/{{ zone.id }}" class="btn btn-sm btn-outline-secondary"> Modifier</a>
-        <a href="/zones/supprimer/{{ zone.id }}" class="btn btn-sm btn-ghost" onclick="return confirm('Supprimer cette zone ?')">Supprimer</a>
+        <a href="/zones/modifier/{{ zone.id }}" class="btn btn-sm btn-outline-secondary btn-action btn-action-edit">Modifier</a>
+        <a href="/zones/supprimer/{{ zone.id }}" class="btn btn-sm btn-ghost btn-action btn-action-delete" onclick="return confirm('Supprimer cette zone ?')">Supprimer</a>
       </td>
       
     </tr>

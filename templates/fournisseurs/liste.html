@@ -16,7 +16,7 @@
   </form>
 
 <div class="d-flex justify-content-end mb-3">
-  <a href="/fournisseurs/ajouter" class="btn btn-ghost">Ajouter un fournisseur</a>
+  <a href="/fournisseurs/ajouter" class="btn btn-ghost btn-action btn-action-add">Ajouter un fournisseur</a>
 </div>
 <a href="/fournisseurs/export_csv?recherche={{ recherche }}" class="btn btn-outline-success mb-3">
      Export CSV
@@ -41,9 +41,9 @@
       <td>{{ f.telephone or '—' }}</td>
       <td>
         <a href="/fournisseurs/{{ f.id }}" class="btn btn-sm btn-outline-primary">Voir</a>
-        <a href="/fournisseurs/modifier/{{ f.id }}" class="btn btn-sm btn-outline-secondary"></a>
+        <a href="/fournisseurs/modifier/{{ f.id }}" class="btn btn-sm btn-outline-secondary btn-action btn-action-edit">Modifier</a>
         <form method="post" action="/fournisseurs/supprimer/{{ f.id }}" style="display:inline;" onsubmit="return confirm('Supprimer ce fournisseur ?')">
-          <button class="btn btn-sm btn-ghost">Supprimer</button>
+          <button class="btn btn-sm btn-ghost btn-action btn-action-delete">Supprimer</button>
         </form>
       </td>
     </tr>

@@ -67,6 +67,24 @@
   color: #fff;
 }
 
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-action-add::before {
+  content: "➕";
+}
+
+.btn-action-edit::before {
+  content: "✏️";
+}
+
+.btn-action-delete::before {
+  content: "🗑️";
+}
+
 .btn-ghost {
   background-color: transparent;
   border: 2px solid var(--global-border-color);

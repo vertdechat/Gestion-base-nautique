@@ -27,7 +27,7 @@
     <button type="submit" class="btn btn-primary w-100">Rechercher</button>
   </div>
   <div class="col-md-3 text-end ">
-    <a href="/documents/ajouter" class="btn btn-ghost  w-100"> Ajouter un document</a>
+    <a href="/documents/ajouter" class="btn btn-ghost btn-action btn-action-add w-100">Ajouter un document</a>
   </div>
 </form>
 
@@ -56,9 +56,9 @@
     </td>
     <td>{{ doc.date_upload[:10] }}</td>
     <td>
-      <form method="post" action="{{ url_for('supprimer_document_libre', id=doc.id) }}"
+        <form method="post" action="{{ url_for('supprimer_document_libre', id=doc.id) }}"
             onsubmit="return confirm('Supprimer ce document ?')">
-        <button class="btn btn-sm btn-outline-danger"></button>
+        <button class="btn btn-sm btn-ghost btn-action btn-action-delete">Supprimer</button>
       </form>
     </td>
   </tr>

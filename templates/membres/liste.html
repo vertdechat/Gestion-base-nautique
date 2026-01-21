@@ -26,7 +26,7 @@
     </div>
   
     <div class="col-md-2 offset-md-5 text-end">
-      <a href="/membres/ajouter" class="btn btn-success"> Nouveau membre</a>
+      <a href="/membres/ajouter" class="btn btn-ghost btn-action btn-action-add w-100">Nouveau membre</a>
     </div>
   
       <!-- Deuxième formulaire : bouton POST pour réinitialiser les cotisations -->
@@ -69,8 +69,8 @@
       <td>{{ m.mode_paiement or '—' }}</td>
       <td>{{ m.date_inscription or '—' }}</td>
       <td>
-        <a href="/membres/modifier/{{ m.id }}" class="btn btn-sm btn-outline-secondary"></a>
-        <a href="/membres/supprimer/{{ m.id }}" class="btn btn-sm btn-ghost" onclick="return confirm('Supprimer ce membre ?')"></a>
+        <a href="/membres/modifier/{{ m.id }}" class="btn btn-sm btn-outline-secondary btn-action btn-action-edit">Modifier</a>
+        <a href="/membres/supprimer/{{ m.id }}" class="btn btn-sm btn-ghost btn-action btn-action-delete" onclick="return confirm('Supprimer ce membre ?')">Supprimer</a>
       </td>
     </tr>
     {% endfor %}

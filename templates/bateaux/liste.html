@@ -21,7 +21,7 @@
     <button type="submit" class="btn btn-primary w-100">Filtrer</button>
   </div>
   <div class="col-md-3 text-end">
-    <a href="/bateaux/ajouter" class="btn btn-ghost  w-100"> Ajouter un bateau</a>
+    <a href="/bateaux/ajouter" class="btn btn-ghost btn-action btn-action-add w-100">Ajouter un bateau</a>
   </div>
 </form>
 
@@ -49,9 +49,9 @@
       <td>{{ bateau.annee or '—' }}</td>
       <td>{% if bateau.est_du_club %}{% else %}{% endif %}</td>
       <td>
-        <a href="/bateaux/{{ bateau.id }}" class="btn btn-sm btn-outline-primary"></a>
-        <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-sm btn-outline-warning"></a>
-        <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-sm btn-ghost" onclick="return confirm('Supprimer ce bateau ?')"></a>
+        <a href="/bateaux/{{ bateau.id }}" class="btn btn-sm btn-outline-primary">Voir</a>
+        <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-sm btn-outline-warning btn-action btn-action-edit">Modifier</a>
+        <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-sm btn-ghost btn-action btn-action-delete" onclick="return confirm('Supprimer ce bateau ?')">Supprimer</a>
       </td>
     </tr>
     {% endfor %}
