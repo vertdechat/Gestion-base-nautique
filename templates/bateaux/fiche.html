@@ -2,10 +2,14 @@
 {% block title %}Fiche bateau{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">🛥️ {{ bateau.nom }}</h2>
+<h2 class="mb-4">
+  <span class="emoji-pill heading-emoji">🛥️</span> {{ bateau.nom }}
+</h2>
 <div class="mt-4 text-end">
   <a href="/bateaux/liste" class="btn btn-secondary">⬅️ Retour à la liste</a>
-  <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-warning">✏️ Modifier</a>
+  <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-warning">
+    <span class="emoji-pill">✏️</span> Modifier
+  </a>
   <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-outline-danger" onclick="return confirm('Supprimer ce bateau ?')">🗑 Supprimer</a>
 </div>
 {% if bateau.photo %}

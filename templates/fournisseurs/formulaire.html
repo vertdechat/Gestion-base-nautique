@@ -5,7 +5,11 @@
 
 {% block content %}
 <h2 class="mb-4">
-  {% if fournisseur %}✏️ Modifier fournisseur{% else %}➕ Ajouter un fournisseur{% endif %}
+  {% if fournisseur %}
+    <span class="emoji-pill heading-emoji">✏️</span> Modifier fournisseur
+  {% else %}
+    <span class="emoji-pill heading-emoji">➕</span> Ajouter un fournisseur
+  {% endif %}
 </h2>
 
 <form method="post" class="row g-3">

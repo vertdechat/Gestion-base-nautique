@@ -2,13 +2,19 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">🏝️ Tableau de bord - Base Nautique</h2>
+<h2 class="mb-4 d-flex align-items-center gap-2">
+  <img src="{{ url_for('static', filename='dashboard.png') }}" alt="Dashboard icon" class="dashboard-title-img">
+  Tableau de bord - Base Nautique
+</h2>
 
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
   {% for label, url, icon in boutons %}
   <div class="col">
     <a href="{{ url }}" class="btn btn-outline-primary w-100 text-start py-3 shadow-sm">
-      <span class="fs-5">{{ icon }} {{ label }}</span>
+      <span class="fs-5 d-flex align-items-center gap-2">
+        <span class="emoji-pill icon-pill">{{ icon }}</span>
+        {{ label }}
+      </span>
     </a>
   </div>
   {% endfor %}

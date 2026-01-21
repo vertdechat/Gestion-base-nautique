@@ -2,7 +2,13 @@
 {% block title %}{% if modifier %}Modifier membre{% else %}Ajouter membre{% endif %}{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">{% if modifier %}✏️ Modifier le membre{% else %}➕ Ajouter un membre{% endif %}</h2>
+<h2 class="mb-4">
+  {% if modifier %}
+    <span class="emoji-pill heading-emoji">✏️</span> Modifier le membre
+  {% else %}
+    <span class="emoji-pill heading-emoji">➕</span> Ajouter un membre
+  {% endif %}
+</h2>
 
 <form method="post" class="row g-3">
   <div class="col-md-3">

@@ -2,7 +2,9 @@
 {% block title %}Supprimer la zone{% endblock %}
 
 {% block content %}
-<h2 class="mb-4 text-danger">❌ Supprimer la zone "{{ zone.nom }}"</h2>
+<h2 class="mb-4 text-danger">
+  <span class="emoji-pill heading-emoji">❌</span> Supprimer la zone "{{ zone.nom }}"
+</h2>
 
 <div class="alert alert-warning">
   Cette opération supprimera également tous les emplacements associés à cette zone.<br>

@@ -2,7 +2,10 @@
 {% block title %}Ajouter un bateau{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">🛥️ {{ "Modifier" if modifier else "Ajouter" }} un bateau</h2>
+<h2 class="mb-4">
+  <span class="emoji-pill heading-emoji">🛥️</span>
+  {{ "Modifier" if modifier else "Ajouter" }} un bateau
+</h2>
 
 <form method="post" enctype="multipart/form-data" class="row g-3">
 

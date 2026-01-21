@@ -5,7 +5,11 @@
 
 {% block content %}
 <h2 class="mb-4">
-  {% if evenement %}✏️ Modifier un événement{% else %}➕ Ajouter un événement{% endif %}
+  {% if evenement %}
+    <span class="emoji-pill heading-emoji">✏️</span> Modifier un événement
+  {% else %}
+    <span class="emoji-pill heading-emoji">➕</span> Ajouter un événement
+  {% endif %}
 </h2>
 
 

@@ -2,7 +2,9 @@
 {% block title %}Fiche fournisseur{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">🏢 {{ fournisseur.nom }}</h2>
+<h2 class="mb-4">
+  <span class="emoji-pill heading-emoji">🏢</span> {{ fournisseur.nom }}
+</h2>
 
 <table class="table table-bordered w-auto">
   <tr><th>Contact</th><td>{{ fournisseur.contact or '—' }}</td></tr>
