@@ -4,6 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV FLASK_ENV=production
 ENV FLASK_RUN_HOST=0.0.0.0
+ENV PORT=8080
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential libjpeg-dev zlib1g-dev \
@@ -16,6 +17,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 8080
 
-CMD ["python", "app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]

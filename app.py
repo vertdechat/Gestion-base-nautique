@@ -4,9 +4,6 @@ import sqlite3
 import os
 import shutil
 import zipfile
-import webbrowser
-import threading
-import time
 from datetime import datetime, date
 from werkzeug.utils import secure_filename, NotFound
 from PIL import Image
@@ -2221,16 +2218,7 @@ def importer_sauvegarde():
 
 
 if __name__ == '__main__':
-    # Lancement du serveur Flask
-    port = 5000
-    url = f"http://127.0.0.1:{port}"
-
-    # Lancer le navigateur après une petite pause
-    def ouvrir_navigateur():
-        time.sleep(1.5)
-        webbrowser.open(url)
-
-    threading.Thread(target=ouvrir_navigateur).start()
-    app.run(debug=True, port=port)
+    port = int(os.environ.get('PORT', '8080'))
+    app.run(host='0.0.0.0', port=port)
 
 
