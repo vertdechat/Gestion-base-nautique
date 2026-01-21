@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4 text-danger">
-  <span class="emoji-pill heading-emoji">❌</span> Supprimer un emplacement
+   Supprimer un emplacement
 </h2>
 
 <div class="alert alert-warning">
@@ -16,7 +16,7 @@
 </div>
 
 <form method="post">
-  <button type="submit" class="btn btn-danger">🗑️ Confirmer la suppression</button>
-  <a href="/zones/{{ emplacement.zone_id }}/emplacements" class="btn btn-secondary">Annuler</a>
+  <button type="submit" class="btn btn-danger"> Confirmer la suppression</button>
+  <a href="/zones/{{ emplacement.zone_id }}/emplacements" class="btn btn-ghost">Annuler</a>
 </form>
 {% endblock %}

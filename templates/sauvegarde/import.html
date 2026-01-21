@@ -3,10 +3,10 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">⬆️</span> Importer une sauvegarde
+   Importer une sauvegarde
 </h2>
 
-<form method="post" enctype="multipart/form-data" class="mb-4" onsubmit="return confirm('⚠️ Cette opération va écraser les données actuelles. Confirmer ?')">
+<form method="post" enctype="multipart/form-data" class="mb-4" onsubmit="return confirm(' Cette opération va écraser les données actuelles. Confirmer ?')">
     <div class="mb-3">
       <label class="form-label">Fichier ZIP</label>
       <input type="file" name="fichier_zip" accept=".zip" class="form-control" required>
@@ -19,12 +19,12 @@
       </label>
     </div>
   
-    <button type="submit" class="btn btn-danger">⚠️ Importer la sauvegarde</button>
-    <a href="/sauvegarde" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-danger"> Importer la sauvegarde</button>
+    <a href="/sauvegarde" class="btn btn-ghost">Annuler</a>
   </form>
   
 
 <div class="alert alert-warning">
-  ⚠️ Cette action va remplacer tout le contenu du dossier <strong>data/</strong> actuel.
+   Cette action va remplacer tout le contenu du dossier <strong>data/</strong> actuel.
 </div>
 {% endblock %}

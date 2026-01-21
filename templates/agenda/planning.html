@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">📅</span> Planning des événements
+   Planning des événements
 </h2>
 
 <form method="get" class="row g-3 mb-4">
@@ -21,7 +21,7 @@
   </form>
 
 <div class="d-flex justify-content-end mb-3">
-  <a href="/agenda/ajouter" class="btn btn-success">➕ Ajouter un événement</a>
+  <a href="/agenda/ajouter" class="btn btn-ghost">Ajouter un événement</a>
 </div>
 
 <table class="table table-bordered table-striped">
@@ -44,9 +44,9 @@
       <td>{{ e.titre }}</td>
       <td>{{ e.annotation or '—' }}</td>
       <td>
-        <a href="/agenda/modifier/{{ e.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
+        <a href="/agenda/modifier/{{ e.id }}" class="btn btn-sm btn-outline-secondary"></a>
         <form method="post" action="/agenda/supprimer/{{ e.id }}" style="display:inline;" onsubmit="return confirm('Supprimer cet événement ?')">
-          <button class="btn btn-sm btn-outline-danger">🗑️</button>
+          <button class="btn btn-sm btn-outline-danger"></button>
         </form>
       </td>
     </tr>

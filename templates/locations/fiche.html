@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">📄</span> Détails de la location
+   Détails de la location
 </h2>
 
 <table class="table table-bordered">
@@ -31,11 +31,11 @@
     <th>Statut</th>
     <td>
       {% if location.annule %}
-        ❌ Annulée
+         Annulée
       {% elif location.fin < now().isoformat() %}
-        ✅ Terminée
+         Terminée
       {% else %}
-        🔄 En cours
+         En cours
       {% endif %}
     </td>
   </tr>
@@ -43,7 +43,7 @@
     <th>Instructions de gréement</th>
     <td>
       {% if location.docx %}
-        <a href="/bateaux/{{ location.bateau_id }}/document" class="btn btn-sm btn-outline-info">📄 Consignes .docx</a>
+        <a href="/bateaux/{{ location.bateau_id }}/document" class="btn btn-sm btn-outline-info"> Consignes .docx</a>
       {% else %}
         —
       {% endif %}
@@ -51,11 +51,11 @@
   </tr>
 </table>
 
-<a href="/locations/liste" class="btn btn-secondary mt-3">⬅️ Retour à la liste</a>
+<a href="/locations/liste" class="btn btn-ghost mt-3"> Retour à la liste</a>
 
 {% if not location.annule %}
   <form method="post" action="/locations/annuler/{{ location.id }}" onsubmit="return confirm('Annuler cette location ?')">
-    <button type="submit" class="btn btn-danger mt-3">❌ Annuler la location</button>
+    <button type="submit" class="btn btn-danger mt-3"> Annuler la location</button>
   </form>
 {% endif %}
 {% endblock %}

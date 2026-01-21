@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">✏️</span> Modifier l'emplacement : {{ emplacement.nom }}
+   Modifier l'emplacement : {{ emplacement.nom }}
 </h2>
 
 <form method="post" class="row g-3">
@@ -28,8 +28,8 @@
     <input type="text" class="form-control" name="remarque" value="{{ emplacement.remarque }}">
   </div>
   <div class="col-md-12">
-    <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
-    <a href="/zones/{{ emplacement.zone_id }}/emplacements" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-ghost">Enregistrer</button>
+    <a href="/zones/{{ emplacement.zone_id }}/emplacements" class="btn btn-ghost">Annuler</a>
   </div>
 </form>
 {% endblock %}

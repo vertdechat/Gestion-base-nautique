@@ -6,9 +6,9 @@
 {% block content %}
 <h2 class="mb-4">
   {% if fournisseur %}
-    <span class="emoji-pill heading-emoji">✏️</span> Modifier fournisseur
+     Modifier fournisseur
   {% else %}
-    <span class="emoji-pill heading-emoji">➕</span> Ajouter un fournisseur
+     Ajouter un fournisseur
   {% endif %}
 </h2>
 
@@ -44,8 +44,8 @@
   </div>
 
   <div class="col-12">
-    <button type="submit" class="btn btn-success">Enregistrer</button>
-    <a href="/fournisseurs/liste" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-ghost">Enregistrer</button>
+    <a href="/fournisseurs/liste" class="btn btn-ghost">Annuler</a>
   </div>
 </form>
 {% endblock %}

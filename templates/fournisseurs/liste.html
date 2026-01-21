@@ -3,12 +3,12 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">🏢</span> Fournisseurs
+   Fournisseurs
 </h2>
 
 <form method="get" class="row g-3 mb-3">
     <div class="col-md-6">
-      <input type="text" name="recherche" class="form-control" placeholder="🔍 Rechercher par nom, contact, email..." value="{{ recherche }}">
+      <input type="text" name="recherche" class="form-control" placeholder=" Rechercher par nom, contact, email..." value="{{ recherche }}">
     </div>
     <div class="col-md-3">
       <button type="submit" class="btn btn-primary w-100">Rechercher</button>
@@ -16,10 +16,10 @@
   </form>
 
 <div class="d-flex justify-content-end mb-3">
-  <a href="/fournisseurs/ajouter" class="btn btn-success">➕ Ajouter un fournisseur</a>
+  <a href="/fournisseurs/ajouter" class="btn btn-ghost">Ajouter un fournisseur</a>
 </div>
 <a href="/fournisseurs/export_csv?recherche={{ recherche }}" class="btn btn-outline-success mb-3">
-    📄 Export CSV
+     Export CSV
 </a>
 
 <table class="table table-bordered table-striped">
@@ -41,9 +41,9 @@
       <td>{{ f.telephone or '—' }}</td>
       <td>
         <a href="/fournisseurs/{{ f.id }}" class="btn btn-sm btn-outline-primary">Voir</a>
-        <a href="/fournisseurs/modifier/{{ f.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
+        <a href="/fournisseurs/modifier/{{ f.id }}" class="btn btn-sm btn-outline-secondary"></a>
         <form method="post" action="/fournisseurs/supprimer/{{ f.id }}" style="display:inline;" onsubmit="return confirm('Supprimer ce fournisseur ?')">
-          <button class="btn btn-sm btn-outline-danger">🗑️</button>
+          <button class="btn btn-sm btn-ghost">Supprimer</button>
         </form>
       </td>
     </tr>

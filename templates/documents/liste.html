@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">📎</span> Documents
+   Documents
 </h2>
 
 
@@ -11,7 +11,7 @@
 
 <form method="get" class="row g-3 mb-3">
   <div class="col-md-6">
-    <input type="text" name="recherche" class="form-control" placeholder="🔍 Rechercher par titre ou commentaire..." value="{{ recherche }}">
+    <input type="text" name="recherche" class="form-control" placeholder=" Rechercher par titre ou commentaire..." value="{{ recherche }}">
   </div>
   <div class="col-md-3">
     <select name="type" class="form-select">
@@ -26,8 +26,8 @@
   <div class="col-md-3">
     <button type="submit" class="btn btn-primary w-100">Rechercher</button>
   </div>
-  <div class="col-md-3 text-end">
-    <a href="/documents/ajouter" class="btn btn-success w-100">➕ Ajouter un document</a>
+  <div class="col-md-3 text-end ">
+    <a href="/documents/ajouter" class="btn btn-ghost  w-100"> Ajouter un document</a>
   </div>
 </form>
 
@@ -51,14 +51,14 @@
     <td>
       <a href="{{ url_for('voir_document_libre', id=doc.id) }}"
          {% if doc.type in types_affichables %}target="_blank"{% endif %}>
-         📄 Voir
+          Voir
       </a>
     </td>
     <td>{{ doc.date_upload[:10] }}</td>
     <td>
       <form method="post" action="{{ url_for('supprimer_document_libre', id=doc.id) }}"
             onsubmit="return confirm('Supprimer ce document ?')">
-        <button class="btn btn-sm btn-outline-danger">🗑️</button>
+        <button class="btn btn-sm btn-outline-danger"></button>
       </form>
     </td>
   </tr>

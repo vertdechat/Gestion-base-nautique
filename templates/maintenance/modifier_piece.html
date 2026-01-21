@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">✏️</span> Modifier la pièce
+   Modifier la pièce
 </h2>
 
 <form method="post" class="row g-3">
@@ -29,8 +29,8 @@
     </select>
   </div>
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
-    <a href="/maintenance/{{ piece.maintenance_id }}" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-ghost">Enregistrer</button>
+    <a href="/maintenance/{{ piece.maintenance_id }}" class="btn btn-ghost">Annuler</a>
   </div>
 </form>
 {% endblock %}

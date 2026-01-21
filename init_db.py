@@ -20,7 +20,7 @@ def init_db():
     cursor.executescript(schema)
     conn.commit()
     conn.close()
-    print("✅ Base de données créée avec succès dans data/app.db")
+    print("Base de données créée avec succès dans data/app.db")
 
 if __name__ == "__main__":
     init_db()

@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">💰</span> Paiements du port — Année {{ annee }}
+   Paiements du port — Année {{ annee }}
 </h2>
 
 <form method="get" class="row g-3 mb-4">
@@ -33,7 +33,7 @@
   </div>
 
   <div class="col-md-3 d-flex align-items-end">
-    <button type="submit" class="btn btn-primary w-100">🔍 Filtrer</button>
+    <button type="submit" class="btn btn-primary w-100"> Filtrer</button>
   </div>
 </form>
 
@@ -55,18 +55,18 @@
       <td>{{ b.nom_proprietaire or '—' }}</td>
       <td>
         {% if b.est_a_jour %}
-          ✅ À jour
+           À jour
         {% else %}
-          ❌ Pas à jour
+           Pas à jour
         {% endif %}
       </td>
       <td>{{ b.mode_paiement or '—' }}</td>
       <td>{{ b.date_paiement or '—' }}</td>
       <td>
         {% if b.est_a_jour %}
-          <a href="/paiements/reinitialiser/{{ b.id }}?annee={{ annee }}" class="btn btn-sm btn-warning">↩️ Réinitialiser</a>
+          <a href="/paiements/reinitialiser/{{ b.id }}?annee={{ annee }}" class="btn btn-sm btn-warning">↩ Réinitialiser</a>
         {% else %}
-          <button type="button" class="btn btn-sm btn-success" onclick="openPaiementModal({{ b.id }}, {{ annee }})">✅ Mettre à jour</button>
+          <button type="button" class="btn btn-sm btn-success" onclick="openPaiementModal({{ b.id }}, {{ annee }})"> Mettre à jour</button>
         {% endif %}
       </td>
     </tr>
@@ -103,8 +103,8 @@
           </select>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success">✅ Valider</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-success"> Valider</button>
+          <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Annuler</button>
         </div>
       </form>
     </div>

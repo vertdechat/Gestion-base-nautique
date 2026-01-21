@@ -1,3 +1,11 @@
+:root {
+  --global-border-color: #000;
+}
+
+* {
+  border-color: var(--global-border-color) !important;
+}
+
 /* Enlarged logo for the main header. */
 .header-logo {
   height: 180px;
@@ -8,24 +16,67 @@
   height: 40px;
   max-height: 40px;
   width: auto;
-  border: 2px solid #ccc;
+  border: 2px solid var(--global-border-color);
   border-radius: 999px;
 }
 
-.emoji-pill {
-  border: 1px solid #ccc;
-  border-radius: 999px;
-  padding: 0.05rem 0.35rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--global-border-color);
+  color: var(--global-border-color);
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.heading-emoji {
-  font-size: 1.2rem;
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: var(--global-border-color);
 }
 
-.icon-pill {
-  padding: 0.05rem 0.35rem;
-  font-size: 1rem;
+.btn-primary,
+.btn-success,
+.btn-warning,
+.btn-danger,
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success,
+.btn-outline-warning,
+.btn-outline-danger,
+.btn-outline-info,
+.btn-outline-dark {
+  background-color: #2d2d2d;
+  border-color: #2d2d2d;
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-warning:hover,
+.btn-danger:hover,
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover,
+.btn-outline-success:hover,
+.btn-outline-warning:hover,
+.btn-outline-danger:hover,
+.btn-outline-info:hover,
+.btn-outline-dark:hover {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  border: 2px solid var(--global-border-color);
+  color: var(--global-border-color);
+  font-weight: 600;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus,
+.btn-ghost:active {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--global-border-color);
 }

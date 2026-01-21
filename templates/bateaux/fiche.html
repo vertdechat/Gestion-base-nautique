@@ -2,15 +2,13 @@
 {% block title %}Fiche bateau{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">🛥️</span> {{ bateau.nom }}
-</h2>
+<h2 class="mb-4">{{ bateau.nom }}</h2>
 <div class="mt-4 text-end">
-  <a href="/bateaux/liste" class="btn btn-secondary">⬅️ Retour à la liste</a>
+  <a href="/bateaux/liste" class="btn btn-ghost">Retour à la liste</a>
   <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-warning">
-    <span class="emoji-pill">✏️</span> Modifier
+    Modifier
   </a>
-  <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-outline-danger" onclick="return confirm('Supprimer ce bateau ?')">🗑 Supprimer</a>
+  <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-ghost" onclick="return confirm('Supprimer ce bateau ?')">Supprimer</a>
 </div>
 {% if bateau.photo %}
   <div class="mb-4">
@@ -23,7 +21,7 @@
 <div class="row">
   <div class="col-md-6">
     <p><strong>Propriétaire :</strong> {{ bateau.nom_proprietaire or '—' }}</p>
-    <p><strong>Club :</strong> {% if bateau.est_du_club %}✅ Oui{% else %}❌ Non{% endif %}</p>
+    <p><strong>Club :</strong> {% if bateau.est_du_club %}Oui{% else %}Non{% endif %}</p>
     <p><strong>Constructeur / Modèle :</strong> {{ bateau.constructeur_modele or '—' }}</p>
     <p><strong>Type :</strong> {{ bateau.type or '—' }}</p>
     <p><strong>Taille :</strong> {{ bateau.taille or '—' }} m</p>
@@ -37,7 +35,7 @@
   <div class="col-md-6">
     <p><strong>Couleur coque :</strong> {{ bateau.couleur_coque or '—' }}</p>
     <p><strong>Couleur pont :</strong> {{ bateau.couleur_pont or '—' }}</p>
-    <p><strong>Remorque au club :</strong> {% if bateau.remorque_au_club %}✅ Oui{% else %}❌ Non{% endif %}</p>
+    <p><strong>Remorque au club :</strong> {% if bateau.remorque_au_club %}Oui{% else %}Non{% endif %}</p>
 
     <p><strong>Assurance :</strong></p>
     <ul>
@@ -51,7 +49,7 @@
 
     <p><strong>Document :</strong>
       {% if bateau.docx %}
-        <a href="{{ url_for('telecharger_docx', bateau_id=bateau.id) }}" >📄 Ouvrir</a>
+        <a href="{{ url_for('telecharger_docx', bateau_id=bateau.id) }}">Ouvrir</a>
       {% else %}
         — Aucun
       {% endif %}

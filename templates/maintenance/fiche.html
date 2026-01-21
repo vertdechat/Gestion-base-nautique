@@ -3,11 +3,11 @@
 
 {% block content %}
 <div class="d-flex justify-content-end mb-3">
-  <a href="/maintenance/liste" class="btn btn-secondary">⬅️ Retour à la liste</a>
+  <a href="/maintenance/liste" class="btn btn-ghost"> Retour à la liste</a>
 </div>
 
 <h2 class="mb-3">
-  <span class="emoji-pill heading-emoji">🛠️</span> {{ maintenance.titre }}
+   {{ maintenance.titre }}
 </h2>
 
 <div class="table-responsive">
@@ -73,7 +73,7 @@
   </table>
 </div>
 
-<h4 class="mt-4">📋 Tâches</h4>
+<h4 class="mt-4"> Tâches</h4>
 <ul>
   {% for t in taches %}
     <li>
@@ -81,16 +81,16 @@
       {% if t.nom_membre %}assignée à {{ t.nom_membre }}{% else %}<em>non assignée</em>{% endif %} —
       <strong>{{ t.statut }}</strong>
       <div class="mt-1">
-        <a href="/maintenance/taches/modifier/{{ t.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
+        <a href="/maintenance/taches/modifier/{{ t.id }}" class="btn btn-sm btn-outline-secondary"></a>
         <form method="post" action="/maintenance/taches/supprimer/{{ t.id }}" style="display:inline;" onsubmit="return confirm('Supprimer cette tâche ?')">
-          <button class="btn btn-sm btn-outline-danger">🗑️</button>
+          <button class="btn btn-sm btn-outline-danger"></button>
         </form>
       </div>
     </li>
   {% endfor %}
 </ul>
 
-<h5 class="mt-4">➕ Ajouter une tâche</h5>
+<h5 class="mt-4"> Ajouter une tâche</h5>
 <form method="post" action="/maintenance/{{ maintenance.id }}/taches/ajouter" class="row g-3">
   <div class="col-md-6">
     <input type="text" name="description" class="form-control" placeholder="Description de la tâche" required>
@@ -119,26 +119,26 @@
     </select>
   </div>
   <div class="col-md-12">
-    <button type="submit" class="btn btn-primary">Ajouter la tâche</button>
+    <button type="submit" class="btn btn-ghost">Ajouter la tâche</button>
   </div>
 </form>
 
-<h4 class="mt-4">🔧 Pièces</h4>
+<h4 class="mt-4"> Pièces</h4>
 <ul>
   {% for p in pieces %}
     <li>
       {{ p.nom }} ({{ p.quantite }}) — {{ p.statut_commande }}{% if p.fournisseur %} — {{ p.fournisseur }}{% endif %}
       <div class="mt-1">
-        <a href="/maintenance/pieces/modifier/{{ p.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
+        <a href="/maintenance/pieces/modifier/{{ p.id }}" class="btn btn-sm btn-outline-secondary"></a>
         <form method="post" action="/maintenance/pieces/supprimer/{{ p.id }}" style="display:inline;" onsubmit="return confirm('Supprimer cette pièce ?')">
-          <button class="btn btn-sm btn-outline-danger">🗑️</button>
+          <button class="btn btn-sm btn-outline-danger"></button>
         </form>
       </div>
     </li>
   {% endfor %}
 </ul>
 
-<h5 class="mt-4">➕ Ajouter une pièce</h5>
+<h5 class="mt-4"> Ajouter une pièce</h5>
 <form method="post" action="/maintenance/{{ maintenance.id }}/pieces/ajouter" class="row g-3">
   <div class="col-md-5">
     <input type="text" name="nom" class="form-control" placeholder="Nom de la pièce" required>
@@ -162,11 +162,11 @@
     </select>
   </div>
   <div class="col-md-12">
-    <button type="submit" class="btn btn-primary">Ajouter la pièce</button>
+    <button type="submit" class="btn btn-ghost">Ajouter la pièce</button>
   </div>
 </form>
 
-<h4 class="mt-4">📎 Documents</h4>
+<h4 class="mt-4"> Documents</h4>
 <ul>
   {% for d in documents %}
     <li>
@@ -180,13 +180,13 @@
 		{% endif %}
 
       <form method="post" action="/maintenance/documents/supprimer/{{ d.id }}" style="display:inline;" onsubmit="return confirm('Supprimer ce document ?')">
-        <button class="btn btn-sm btn-outline-danger ms-2">🗑️</button>
+        <button class="btn btn-sm btn-outline-danger ms-2"></button>
       </form>
     </li>
   {% endfor %}
 </ul>
 
-<h5 class="mt-4">➕ Ajouter un document</h5>
+<h5 class="mt-4"> Ajouter un document</h5>
 <form method="post" action="/maintenance/{{ maintenance.id }}/documents/ajouter" enctype="multipart/form-data" class="row g-3">
   <div class="col-md-8">
     <input type="file" name="fichier" class="form-control" required>
@@ -196,7 +196,7 @@
   </div>
 </form>
 
-<h4 class="mt-4">📷 Photos</h4>
+<h4 class="mt-4"> Photos</h4>
 <div class="row">
   {% for photo in photos %}
     <div class="col-md-3 mb-3">
@@ -205,13 +205,13 @@
           </a>         
       <small class="d-block">{{ photo.commentaire }}</small>
       <form method="post" action="/maintenance/photos/supprimer/{{ photo.id }}" onsubmit="return confirm('Supprimer cette photo ?')">
-        <button class="btn btn-sm btn-outline-danger mt-1">🗑️</button>
+        <button class="btn btn-sm btn-outline-danger mt-1"></button>
       </form>
     </div>
   {% endfor %}
 </div>
 
-<h5 class="mt-4">➕ Ajouter une photo</h5>
+<h5 class="mt-4"> Ajouter une photo</h5>
 <form method="post" action="/maintenance/{{ maintenance.id }}/photos/ajouter" enctype="multipart/form-data" class="row g-3">
   <div class="col-md-8">
     <input type="file" name="photo" class="form-control" accept="image/*" required>
@@ -226,18 +226,18 @@
 
 </div>
 
-<h4 class="mt-4">💬 Commentaires</h4>
+<h4 class="mt-4"> Commentaires</h4>
 <ul>
     {% for c in commentaires %}
     <li>
       <strong>{{ c.auteur or '—' }}</strong> ({{ c.date[:10] }}) : {{ c.texte }}
       <form method="post" action="/maintenance/commentaires/supprimer/{{ c.id }}" style="display:inline;" onsubmit="return confirm('Supprimer ce commentaire ?')">
-        <button class="btn btn-sm btn-outline-danger ms-2">🗑️</button>
+        <button class="btn btn-sm btn-outline-danger ms-2"></button>
       </form>
     </li>
   {% endfor %}
 </ul>
-<h5 class="mt-4">➕ Ajouter un commentaire</h5>
+<h5 class="mt-4"> Ajouter un commentaire</h5>
 <form method="post" action="/maintenance/{{ maintenance.id }}/commentaires/ajouter" class="row g-3">
   <div class="col-md-6">
     <input type="text" name="auteur" class="form-control" placeholder="Votre nom (facultatif)">
@@ -246,11 +246,11 @@
     <textarea name="texte" class="form-control" placeholder="Votre commentaire" rows="3" required></textarea>
   </div>
   <div class="col-md-12">
-    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <button type="submit" class="btn btn-ghost">Ajouter</button>
   </div>
 </form>
 
-<h4 class="mt-4">🏷️ Tags</h4>
+<h4 class="mt-4"> Tags</h4>
 <form method="post" action="/maintenance/{{ maintenance.id }}/tags/modifier">
   <div class="mb-2">
     {% for t in tous_les_tags %}
@@ -265,7 +265,7 @@
 </form>
 
 <div class="d-flex justify-content-end mb-3">
-  <a href="/maintenance/liste" class="btn btn-secondary">⬅️ Retour à la liste</a>
+  <a href="/maintenance/liste" class="btn btn-ghost"> Retour à la liste</a>
 </div>
 
 <br>

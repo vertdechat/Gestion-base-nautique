@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">🏢</span> {{ fournisseur.nom }}
+   {{ fournisseur.nom }}
 </h2>
 
 <table class="table table-bordered w-auto">
@@ -22,7 +22,7 @@
   </tr>
 </table>
 
-<h4 class="mt-4">🔧 Pièces associées</h4>
+<h4 class="mt-4"> Pièces associées</h4>
 <table class="table table-sm table-striped">
   <thead class="table-light">
     <tr>
@@ -50,5 +50,5 @@
   <div class="alert alert-info">Aucune pièce enregistrée pour ce fournisseur.</div>
 {% endif %}
 
-<a href="/fournisseurs/liste" class="btn btn-secondary mt-4">⬅️ Retour à la liste</a>
+<a href="/fournisseurs/liste" class="btn btn-ghost mt-4"> Retour à la liste</a>
 {% endblock %}

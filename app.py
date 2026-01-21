@@ -80,18 +80,18 @@ def inject_now():
 @app.route('/')
 def index():
     boutons = [
-        ("Gestion des bateaux", "/bateaux/liste", "🛥️"),
-        ("Gestion des emplacements", "/zones/liste", "📍"),
-        ("Paiements port", "/paiements/port", "💰"),
-        ("Maintenance club", "/maintenance/liste", "🔧"),
-        ("Fournisseurs", "/fournisseurs/liste", "🏢"),
-        ("Locations", "/locations/liste", "🚤"),
-        ("Membres", "/membres/liste", "👤"),
-        ("Planning", "/agenda/planning", "📅"),
-        ("Documents", "/documents/liste", "📎"),
-        ("Historique", "/historique/interventions", "🛠️"),
-        ("Statistiques", "/statistiques/tableau_de_bord", "📊"),
-        ("Sauvegarde", "/sauvegarde", "💾")
+        ("Gestion des bateaux", "/bateaux/liste"),
+        ("Gestion des emplacements", "/zones/liste"),
+        ("Paiements port", "/paiements/port"),
+        ("Maintenance club", "/maintenance/liste"),
+        ("Fournisseurs", "/fournisseurs/liste"),
+        ("Locations", "/locations/liste"),
+        ("Membres", "/membres/liste"),
+        ("Planning", "/agenda/planning"),
+        ("Documents", "/documents/liste"),
+        ("Historique", "/historique/interventions"),
+        ("Statistiques", "/statistiques/tableau_de_bord"),
+        ("Sauvegarde", "/sauvegarde")
     ]
     return render_template('index.html', boutons=boutons)
 
@@ -210,7 +210,7 @@ def ajouter_bateau():
                 print("Erreur lors de l’enregistrement du document :", e)
 
         db.commit()
-        flash("🚤 Bateau ajouté avec succès.")
+        flash("Bateau ajouté avec succès.")
         ajouter_historique("bateau", f"Ajout du bateau « {nom} »", f"Propriétaire : {nom_proprietaire}", bateau_id)
         return redirect('/bateaux/liste')
 
@@ -295,7 +295,7 @@ def modifier_bateau(id):
 
 
         db.commit()
-        flash("✅ Bateau modifié avec succès.")
+        flash("Bateau modifié avec succès.")
         ajouter_historique("bateau", f"Modification du bateau #{id}", f"Nom : {nom}", id)
         return redirect('/bateaux/liste')
 
@@ -2207,11 +2207,11 @@ def importer_sauvegarde():
             shutil.move(chemin_data_extrait, "data")
 
             ajouter_historique("système", "Import d'une sauvegarde .zip", nom_fichier)
-            flash("📂 Sauvegarde importée avec succès (base app.db restaurée).", "success")
+            flash("Sauvegarde importée avec succès (base app.db restaurée).", "success")
 
         except Exception as e:
             print("Erreur ZIP :", e)
-            flash("❌ Erreur lors de l'import. Vérifiez que le fichier ZIP contient bien un dossier 'data/app.db'.", "danger")
+            flash("Erreur lors de l'import. Vérifiez que le fichier ZIP contient bien un dossier 'data/app.db'.", "danger")
 
         return redirect('/sauvegarde')
 

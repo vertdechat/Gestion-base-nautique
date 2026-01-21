@@ -4,9 +4,9 @@
 {% block content %}
 <h2 class="mb-4">
   {% if modifier %}
-    <span class="emoji-pill heading-emoji">✏️</span> Modifier le membre
+     Modifier le membre
   {% else %}
-    <span class="emoji-pill heading-emoji">➕</span> Ajouter un membre
+     Ajouter un membre
   {% endif %}
 </h2>
 
@@ -52,7 +52,7 @@
     <button type="submit" class="btn btn-primary">
       {% if modifier %}Enregistrer{% else %}Ajouter{% endif %}
     </button>
-    <a href="/membres/liste" class="btn btn-secondary">Annuler</a>
+    <a href="/membres/liste" class="btn btn-ghost">Annuler</a>
   </div>
 </form>
 {% endblock %}

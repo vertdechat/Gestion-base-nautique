@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">👤</span> Liste des membres
+   Liste des membres
 </h2>
 
 <!-- Premier formulaire : recherche & filtre en GET -->
@@ -26,7 +26,7 @@
     </div>
   
     <div class="col-md-2 offset-md-5 text-end">
-      <a href="/membres/ajouter" class="btn btn-success">➕ Nouveau membre</a>
+      <a href="/membres/ajouter" class="btn btn-success"> Nouveau membre</a>
     </div>
   
       <!-- Deuxième formulaire : bouton POST pour réinitialiser les cotisations -->
@@ -65,12 +65,12 @@
       <td>{{ m.nom }}</td>
       <td>{{ m.prenom }}</td>
       <td>{{ m.tel1 or '—' }}</td>
-      <td>{% if m.cotisation_a_jour %}✅ À jour{% else %}❌ Pas à jour{% endif %}</td>
+      <td>{% if m.cotisation_a_jour %} À jour{% else %} Pas à jour{% endif %}</td>
       <td>{{ m.mode_paiement or '—' }}</td>
       <td>{{ m.date_inscription or '—' }}</td>
       <td>
-        <a href="/membres/modifier/{{ m.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
-        <a href="/membres/supprimer/{{ m.id }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer ce membre ?')">🗑️</a>
+        <a href="/membres/modifier/{{ m.id }}" class="btn btn-sm btn-outline-secondary"></a>
+        <a href="/membres/supprimer/{{ m.id }}" class="btn btn-sm btn-ghost" onclick="return confirm('Supprimer ce membre ?')"></a>
       </td>
     </tr>
     {% endfor %}

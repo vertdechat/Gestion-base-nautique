@@ -3,12 +3,12 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">🛠️</span> Liste des maintenances
+   Liste des maintenances
 </h2>
 
 <form method="get" class="row g-3 mb-4">
   <div class="col-md-4">
-    <input type="text" name="recherche" class="form-control" placeholder="🔍 Titre, tag, catégorie..." value="{{ recherche }}">
+    <input type="text" name="recherche" class="form-control" placeholder=" Titre, tag, catégorie..." value="{{ recherche }}">
   </div>
   <div class="col-md-3">
     <select name="statut" class="form-select">
@@ -22,10 +22,10 @@
     <button type="submit" class="btn btn-primary w-100">Filtrer</button>
   </div>
   <div class="col-md-3 text-end">
-    <a href="/maintenance/ajouter" class="btn btn-success w-100">➕ Ajouter une maintenance</a>
+    <a href="/maintenance/ajouter" class="btn btn-ghost w-100"> Ajouter une maintenance</a>
   </div>
   <div class="col-md-3 text-end mt-2">
-    <a href="/maintenance/export_csv?recherche={{ recherche }}&statut={{ statut }}" class="btn btn-outline-success w-100">📄 Export CSV</a>
+    <a href="/maintenance/export_csv?recherche={{ recherche }}&statut={{ statut }}" class="btn btn-outline-success w-100"> Export CSV</a>
   </div>
 </form>
 
@@ -51,7 +51,7 @@
       <td><span class="badge bg-{{ 'primary' if m.statut == 'en cours' else 'success' if m.statut == 'clôturée' else 'light text-dark' }}">{{ m.statut }}</span></td>
       <td>{{ m.date_creation[:10] }}</td>
       <td>
-        <a href="/maintenance/{{ m.id }}" class="btn btn-sm btn-outline-primary">🔍 Voir</a>
+        <a href="/maintenance/{{ m.id }}" class="btn btn-sm btn-outline-primary"> Voir</a>
       </td>
     </tr>
     {% endfor %}

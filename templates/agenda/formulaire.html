@@ -6,9 +6,9 @@
 {% block content %}
 <h2 class="mb-4">
   {% if evenement %}
-    <span class="emoji-pill heading-emoji">✏️</span> Modifier un événement
+     Modifier un événement
   {% else %}
-    <span class="emoji-pill heading-emoji">➕</span> Ajouter un événement
+     Ajouter un événement
   {% endif %}
 </h2>
 
@@ -41,8 +41,8 @@
   </div>
 
   <div class="col-12">
-    <button type="submit" class="btn btn-success">Enregistrer</button>
-    <a href="/agenda/planning" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-ghost">Enregistrer</button>
+    <a href="/agenda/planning" class="btn btn-ghost">Annuler</a>
   </div>
 </form>
 {% endblock %}

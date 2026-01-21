@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">🛥️</span> Liste des bateaux
+   Liste des bateaux
 </h2>
 
 <form method="get" class="row g-3 mb-4">
@@ -21,7 +21,7 @@
     <button type="submit" class="btn btn-primary w-100">Filtrer</button>
   </div>
   <div class="col-md-3 text-end">
-    <a href="/bateaux/ajouter" class="btn btn-success w-100">➕ Ajouter un bateau</a>
+    <a href="/bateaux/ajouter" class="btn btn-ghost  w-100"> Ajouter un bateau</a>
   </div>
 </form>
 
@@ -47,11 +47,11 @@
       <td>{{ bateau.type or '—' }}</td>
       <td>{{ bateau.categorie or '—' }}</td>
       <td>{{ bateau.annee or '—' }}</td>
-      <td>{% if bateau.est_du_club %}✅{% else %}❌{% endif %}</td>
+      <td>{% if bateau.est_du_club %}{% else %}{% endif %}</td>
       <td>
-        <a href="/bateaux/{{ bateau.id }}" class="btn btn-sm btn-outline-primary">🔍</a>
-        <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-sm btn-outline-warning">✏️</a>
-        <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer ce bateau ?')">🗑</a>
+        <a href="/bateaux/{{ bateau.id }}" class="btn btn-sm btn-outline-primary"></a>
+        <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-sm btn-outline-warning"></a>
+        <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-sm btn-ghost" onclick="return confirm('Supprimer ce bateau ?')"></a>
       </td>
     </tr>
     {% endfor %}

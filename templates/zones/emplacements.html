@@ -3,7 +3,7 @@
 
 {% block content %}
 <h2 class="mb-4">
-  <span class="emoji-pill heading-emoji">📍</span> Emplacements de la zone
+   Emplacements de la zone
   <span class="badge" style="background-color: {{ zone.couleur }}">{{ zone.nom }}</span>
 </h2>
 
@@ -23,7 +23,7 @@
     <input type="text" name="remarque" class="form-control" placeholder="Remarque (optionnelle)">
   </div>
   <div class="col-md-2">
-    <button type="submit" class="btn btn-success w-100">➕ Ajouter</button>
+    <button type="submit" class="btn btn-ghost w-100">Ajouter</button>
   </div>
 </form>
 
@@ -44,16 +44,16 @@
     <tr>
       <td>{{ e.nom }}</td>
       <td>{{ e.type }}</td>
-      <td>{% if e.disponible %}🟢 Disponible{% else %}🔴 Occupé{% endif %}</td>
+      <td>{% if e.disponible %} Disponible{% else %} Occupé{% endif %}</td>
       <td>{% if e.nom_bateau %}<a href="/bateaux/{{ e.bateau_id }}">{{ e.nom_bateau }}</a>{% else %}—{% endif %}</td>
       <td>{{ e.remarque or '—' }}</td>
       <td>
-        <a href="/emplacements/modifier/{{ e.id }}" class="btn btn-sm btn-outline-secondary">✏️</a>
-        <a href="/emplacements/supprimer/{{ e.id }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer cet emplacement ?')">🗑️</a>
+        <a href="/emplacements/modifier/{{ e.id }}" class="btn btn-sm btn-outline-secondary"></a>
+        <a href="/emplacements/supprimer/{{ e.id }}" class="btn btn-sm btn-ghost" onclick="return confirm('Supprimer cet emplacement ?')"></a>
         {% if e.bateau_id %}
-        <a href="/emplacements/detacher/{{ e.id }}" class="btn btn-sm btn-outline-warning">↩️ Libérer</a>
+        <a href="/emplacements/detacher/{{ e.id }}" class="btn btn-sm btn-outline-warning">↩ Libérer</a>
       {% else %}
-        <a href="/emplacements/assigner/{{ e.id }}" class="btn btn-sm btn-outline-success">✅ Assigner</a>
+        <a href="/emplacements/assigner/{{ e.id }}" class="btn btn-sm btn-outline-success"> Assigner</a>
       {% endif %}
       </td>
     </tr>
@@ -61,5 +61,5 @@
   </tbody>
 </table>
 
-<a href="/zones/liste" class="btn btn-secondary mt-4">⬅️ Retour à la liste des zones</a>
+<a href="/zones/liste" class="btn btn-ghost mt-4"> Retour à la liste des zones</a>
 {% endblock %}
