@@ -16,7 +16,7 @@
 
   <div class="col-md-6">
     <label class="form-label">Propriétaire (membre)</label>
-    <select name="nom_proprietaire" class="form-select" required>
+    <select name="nom_proprietaire" class="form-select" id="nom_proprietaire" required>
       <option value="">— Sélectionner un membre —</option>
       {% for m in membres %}
         {% set full_name = m.nom ~ " " ~ m.prenom %}
@@ -136,6 +136,30 @@
     <button type="submit" class="btn btn-ghost">Enregistrer</button>
     <a href="/bateaux/liste" class="btn btn-ghost">Annuler</a>
   </div>
+
+  <script>
+    (function () {
+      const clubCheckbox = document.querySelector('input[name="est_du_club"]');
+      const proprietaireSelect = document.getElementById('nom_proprietaire');
+
+      if (!clubCheckbox || !proprietaireSelect) {
+        return;
+      }
+
+      const toggleRequirement = () => {
+        if (clubCheckbox.checked) {
+          proprietaireSelect.required = false;
+          proprietaireSelect.parentElement?.classList?.add('text-muted');
+        } else {
+          proprietaireSelect.required = true;
+          proprietaireSelect.parentElement?.classList?.remove('text-muted');
+        }
+      };
+
+      clubCheckbox.addEventListener('change', toggleRequirement);
+      toggleRequirement();
+    })();
+  </script>
 
 </form>
 
