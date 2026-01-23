@@ -31,7 +31,8 @@
   </div>
 </form>
 
-<table class="table table-bordered table-striped">
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
   <thead class="table-light">
     <tr>
       <th>Titre</th>
@@ -66,6 +67,7 @@
 
   </tbody>
 </table>
+</div>
 
 {% if documents|length == 0 %}
   <div class="alert alert-info">Aucun document trouvé.</div>

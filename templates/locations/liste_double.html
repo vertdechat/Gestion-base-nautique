@@ -7,7 +7,8 @@
 </div>
 
 <h2 class="mb-4">Locations en cours</h2>
-<table class="table table-bordered table-striped">
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
   <thead class="table-light">
     <tr>
       <th>Bateau</th>
@@ -27,6 +28,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 {% if locations_encours|length == 0 %}
 <div class="alert alert-info">Aucune location en cours</div>
@@ -36,7 +38,8 @@
 
 <h2 class="mb-4">Bateaux du club</h2>
 
-<table class="table table-bordered table-striped">
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
   <thead class="table-light">
     <tr>
       <th>Nom</th>
@@ -78,6 +81,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 {% if bateaux|length == 0 %}
 <div class="alert alert-info">Aucun bateau du club</div>

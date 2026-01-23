@@ -21,11 +21,14 @@
     <button type="submit" class="btn btn-primary w-100">Filtrer</button>
   </div>
   <div class="col-md-3 text-end">
-    <a href="/bateaux/ajouter" class="btn btn-ghost btn-action btn-action-add w-100">Ajouter un bateau</a>
+    <a href="/bateaux/ajouter" class="btn btn-ghost btn-action btn-action-add w-100">
+      <span class="btn-action-label">Ajouter un bateau</span>
+    </a>
   </div>
 </form>
 
-<table class="table table-striped table-bordered align-middle">
+<div class="table-responsive">
+  <table class="table table-striped table-bordered align-middle">
   <thead class="table-light">
     <tr>
       <th>Nom</th>
@@ -49,14 +52,21 @@
       <td>{{ bateau.annee or '—' }}</td>
       <td>{% if bateau.est_du_club %}{% else %}{% endif %}</td>
       <td>
-        <a href="/bateaux/{{ bateau.id }}" class="btn btn-sm btn-outline-primary">Voir</a>
-        <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-sm btn-outline-warning btn-action btn-action-edit">Modifier</a>
-        <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-sm btn-ghost btn-action btn-action-delete" onclick="return confirm('Supprimer ce bateau ?')">Supprimer</a>
+        <a href="/bateaux/{{ bateau.id }}" class="btn btn-sm btn-outline-primary">
+          <span class="btn-action-label">Voir</span>
+        </a>
+        <a href="/bateaux/modifier/{{ bateau.id }}" class="btn btn-sm btn-outline-warning btn-action btn-action-edit">
+          <span class="btn-action-label">Modifier</span>
+        </a>
+        <a href="/bateaux/supprimer/{{ bateau.id }}" class="btn btn-sm btn-ghost btn-action btn-action-delete" onclick="return confirm('Supprimer ce bateau ?')">
+          <span class="btn-action-label">Supprimer</span>
+        </a>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 {% if nb_pages > 1 %}
 <nav class="mt-4">

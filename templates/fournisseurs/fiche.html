@@ -6,7 +6,8 @@
    {{ fournisseur.nom }}
 </h2>
 
-<table class="table table-bordered w-auto">
+<div class="table-responsive">
+  <table class="table table-bordered w-auto">
   <tr><th>Contact</th><td>{{ fournisseur.contact or '—' }}</td></tr>
   <tr><th>Email</th><td>{{ fournisseur.email or '—' }}</td></tr>
   <tr><th>Téléphone</th><td>{{ fournisseur.telephone or '—' }}</td></tr>
@@ -20,10 +21,12 @@
         {% endif %}
       </td>
   </tr>
-</table>
+  </table>
+</div>
 
 <h4 class="mt-4"> Pièces associées</h4>
-<table class="table table-sm table-striped">
+<div class="table-responsive">
+  <table class="table table-sm table-striped">
   <thead class="table-light">
     <tr>
       <th>Nom de la pièce</th>
@@ -44,7 +47,8 @@
     </tr>
     {% endfor %}
   </tbody>
-</table>
+  </table>
+</div>
 
 {% if pieces|length == 0 %}
   <div class="alert alert-info">Aucune pièce enregistrée pour ce fournisseur.</div>

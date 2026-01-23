@@ -47,7 +47,8 @@
   <!-- Tableau des membres ici... -->
   
 
-<table class="table table-bordered table-striped">
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>Nom</th>
@@ -76,6 +77,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 {% if membres|length == 0 %}
 <div class="alert alert-info">Aucun membre trouvé.</div>

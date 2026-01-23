@@ -37,7 +37,8 @@
   </div>
 </form>
 
-<table class="table table-striped table-bordered">
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
   <thead class="table-light">
     <tr>
       <th>Nom du bateau</th>
@@ -73,6 +74,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 {% if bateaux|length == 0 %}
   <div class="alert alert-info">Aucun bateau trouvé pour ces critères.</div>

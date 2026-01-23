@@ -24,7 +24,8 @@
   <a href="/agenda/ajouter" class="btn btn-ghost">Ajouter un événement</a>
 </div>
 
-<table class="table table-bordered table-striped">
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
   <thead class="table-light">
     <tr>
       <th>Date</th>
@@ -53,6 +54,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 {% if evenements|length == 0 %}
   <div class="alert alert-info">Aucun événement prévu.</div>

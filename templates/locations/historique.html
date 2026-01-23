@@ -6,7 +6,8 @@
    Historique des locations terminées
 </h2>
 
-<table class="table table-bordered table-striped">
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
   <thead class="table-light">
     <tr>
       <th>Bateau</th>
@@ -26,6 +27,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 {% if locations|length == 0 %}
   <div class="alert alert-info">Aucune location terminée pour le moment.</div>

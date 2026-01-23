@@ -6,7 +6,8 @@
    Détails de la location
 </h2>
 
-<table class="table table-bordered">
+<div class="table-responsive">
+  <table class="table table-bordered">
   <tr>
     <th>Bateau</th>
     <td>{{ location.nom_bateau }}</td>
@@ -49,7 +50,8 @@
       {% endif %}
     </td>
   </tr>
-</table>
+  </table>
+</div>
 
 <a href="/locations/liste" class="btn btn-ghost mt-3"> Retour à la liste</a>
 

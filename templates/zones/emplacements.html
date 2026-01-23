@@ -28,7 +28,8 @@
 </form>
 
 <!-- Tableau des emplacements -->
-<table class="table table-bordered table-striped">
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
   <thead class="table-light">
     <tr>
       <th>Nom</th>
@@ -60,6 +61,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 <a href="/zones/liste" class="btn btn-ghost mt-4"> Retour à la liste des zones</a>
 {% endblock %}
